@@ -2,18 +2,28 @@ project:
   type: website
 
 website:
-  title: "website"
+  title: Personal Blog
+  site-url: "https://abhiaagarwal.com"
+  repo-url: "https://github.com/abhiagarwal01/abhiagarwal01"
+  twitter-card: true
+  open-graph:
+    locale: en_US
+  google-analytics:
+    tracking-id: "G-LL44DGVQD9"
+    storage: none
+    anonymize-ip: true
   navbar:
     right:
       - about.qmd
       - icon: github
-        href: https://github.com/
+        href: https://github.com/abhiagarwal01
+        aria-label: Github
       - icon: twitter
-        href: https://twitter.com
+        href: https://twitter.com/abhiaaaaagarwal
+        aria-label: Twitter
 format:
   html:
-    theme: cosmo
+    theme:
+      light: flatly
+      dark: darkly
     css: styles.css
-
-
-
