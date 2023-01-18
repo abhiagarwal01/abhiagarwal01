@@ -24,6 +24,8 @@ website:
       theme: "preferred_color_scheme"
       input-position: "top"
   navbar:
+    title: false
+    pinned: true
     right:
       - about.qmd
       - blog.qmd
@@ -37,6 +39,8 @@ website:
 format:
   html:
     theme:
-      light: flatly
-      dark: darkly
-    css: styles.css
+      light: [litera, "assets/styles/theme.scss"]
+      dark: [litera, "assets/styles/theme.scss", "assets/styles/dark.scss"]
+    header-includes: >
+      <link rel="preconnect" href="https://rsms.me/">
+      <link rel="stylesheet" href="https://rsms.me/inter/inter.css">

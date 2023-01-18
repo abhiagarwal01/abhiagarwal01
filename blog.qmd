@@ -1,13 +1,15 @@
 ---
 title: "Blog"
+description: "Musings about Infrastructure, Machine Learning, Data Engineering, and the NBA"
 comments: false
 listing:
   contents: posts
   sort: "date desc"
   type: default
-  categories: true
-  sort-ui: false
-  filter-ui: false
+  categories: unnumbered
+  sort-ui: true
+  filter-ui: true
+  feed: true
 page-layout: full
 title-block-banner: true
 ---
