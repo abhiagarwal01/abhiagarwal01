@@ -4,6 +4,7 @@ description: "Using OpenWISP to centralize the management of multiple OpenWRT Ac
 author: "Abhi Agarwal"
 date: "2022-01-20"
 categories: [devops, self-hosting]
+draft: true
 ---
 
 # Introduction

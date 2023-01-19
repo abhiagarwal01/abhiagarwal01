@@ -1,0 +1,37 @@
+---
+title: "Break up the big ball: Heliocentric Offenses in the NBA"
+description: "The modern NBA is dominated by its best players dominating the ball. I investigate whether this strategy is conducive to winning games and postseason success."
+author: "Abhi Agarwal"
+date: "2022-01-19"
+categories: [nba, data-science]
+bibliography: "citations.yaml"
+---
+
+# Introduction
+
+The NBA, more than ever, is a league dominated by its superstars. Superstars that happen to also dominate the ball. More often than ever, NBA teams are giving their ball to their best players more often, asking them to make plays, whether it's putting the ball in the hoop or dishing it out to other players to put the ball in the hoop.
+
+The poster child of this movement, James Harden, and his team, the Houston Rockets, was lauded with strong success in the regular season, leading to record wins and a MVP for Harden — but notably failed to reach the NBA Finals even once in their 6-season run. Russell Westbrook won an MVP posting one of the most heliocentric seasons ever, but has little postseason success to show for his entire career. And today, Luka Doncic and Trae Young, two extraordinary young talents who were drafted together^[and even traded for each other on draft night]. Both have had postseason success, but are yet to break through to the Finals. 
+
+![The Toronto Raptors played the Dallas Mavericks on November 26, 2022 and employed a strategy of trapping Luka Doncic, forcing him to pass up the ball instantly and his team play 4v3. The Raptors won 105-100.](raptors_trap_luka.jpg){.preview-image}
+
+Let's begin with a list of questions I hope to answer:
+
+* What is heliocentrism?
+* How do we measure heliocentrism?
+* Is Heliocentrism effective?
+* Why are teams heliocentric?
+    * Is it out of necessity do to lack of talent?
+    * Do they believe it to be a winning strategy?
+    * Players who want to always have the ball in their hands?
+
+# What even is Heliocentrism?
+
+The phrase "Heliocentric" was coined by Copernicus in 1543 when describing how his model for the Star being the focal point of the Universe and the Earth and its siblings rotating around it — but in the Basketball lexicon, the term was first used by *The Athletic* writer Seth Partnow in his 2019 piece, "Rising Trend in the NBA: Heliocentrism" [@partnowNewNBAHeliocentrism2019]. Partnow invoked the imagery of a team's role players revolving around the star of the team, with the star playing the focal point in handling the ball by scoring and making plays. 
+
+# Measuring Heliocentrism
+
+# Sources
+
+::: {#refs}
+:::

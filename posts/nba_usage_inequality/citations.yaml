@@ -1,0 +1,222 @@
+---
+references:
+- id: cheemaRiseHeliocentrismNBA2021
+  abstract: >-
+    It certainly feels like more and more NBA offenses are becoming
+    one-dimensional and centered around a single superstar. Do the numbers
+    support this theory?
+  accessed:
+    - year: 2023
+      month: 1
+      day: 19
+  author:
+    - family: Cheema
+      given: Ahmed
+  citation-key: cheemaRiseHeliocentrismNBA2021
+  container-title: The Spax
+  issued:
+    - year: 2021
+      month: 11
+      day: 11
+  language: en-US
+  title: The Rise of Heliocentrism In NBA Offenses
+  type: post-weblog
+  URL: https://www.thespax.com/nba/the-rise-of-heliocentrism-in-nba-offenses/
+
+- id: kocRisingTrendNBA2020
+  abstract: >-
+    In recent years, the term heliocentric used as the trend that defines the
+    way of preferred team building.
+  accessed:
+    - year: 2023
+      month: 1
+      day: 19
+  author:
+    - family: Koç
+      given: Burak Can
+  citation-key: kocRisingTrendNBA2020
+  container-title: Medium
+  issued:
+    - year: 2020
+      month: 10
+      day: 2
+  language: en
+  title: 'Rising Trend in the NBA: Heliocentrism'
+  title-short: Rising Trend in the NBA
+  type: webpage
+  URL: >-
+    https://towardsdatascience.com/rising-trend-in-the-nba-heliocentrism-6bb12eba1c54
+
+- id: partnowNewNBAHeliocentrism2019
+  abstract: >-
+    Today's stars are being asked to do more with the ball than ever before.
+    Here's what analytics tell us about how that's impacting the NBA.
+  accessed:
+    - year: 2023
+      month: 1
+      day: 19
+  author:
+    - family: Partnow
+      given: Seth
+  citation-key: partnowNewNBAHeliocentrism2019
+  container-title: The Athletic
+  issued:
+    - year: 2019
+      month: 12
+      day: 19
+  language: en
+  title: >-
+    The New NBA Heliocentrism: How teams revolve more around today’s stars than
+    they ever have before
+  title-short: The New NBA Heliocentrism
+  type: article-newspaper
+  URL: >-
+    https://theathletic.com/1427059/2019/12/06/the-new-nba-heliocentrism-how-teams-revolve-more-around-todays-stars-than-they-ever-have-before/
+
+- id: pittsleyTripleDoubleHeliocentric2022
+  abstract: It’s the latest in the Professor’s Corner series.
+  accessed:
+    - year: 2023
+      month: 1
+      day: 19
+  author:
+    - family: Pittsley
+      given: Jesse
+  citation-key: pittsleyTripleDoubleHeliocentric2022
+  container-title: Pounding The Rock
+  issued:
+    - year: 2022
+      month: 1
+      day: 25
+  language: en
+  title: The Triple Double in the Heliocentric Era of NBA offenses.
+  type: webpage
+  URL: >-
+    https://www.poundingtherock.com/2022/1/25/22894822/the-triple-double-in-the-heliocentric-era-of-nba-offenses
+
+- id: pradaSpacedOutHow2022
+  abstract: >-
+    "A hands-on, illuminating deconstruction of NBA basketball, tracing the
+    tactical evolution of the modern game. As the NBA celebrates and surpasses
+    75 years of existence, today's game looks nothing like it did in generations
+    past when Bill Russell, Wilt Chamberlain, and Kareem Abdul-Jabbar took turns
+    ruling the league. But it's also entirely different from a decade -- even
+    half decade -- ago. Today's stars enter the league with more versatility and
+    fluidity than ever before, and they need it to handle the strategies,
+    philosophies, schemes, skill sets, movement patterns, and measures of
+    basketball intelligence that simply didn't exist in the past. Spaced Out
+    tells the story of what professional basketball looks like right now and how
+    it got here. Taking a court-level view, Mike Prada breaks down high-level
+    play to elucidate the athleticism, strategy, and skill demonstrated on a
+    nighty basis, while shining a light on the historical forces that have
+    dramatically altered the shape of the game and the role of its superstars.
+    Topics covered include the explosion of three point shooting, the rise and
+    fall and rise again of zone defense, the impact of tighter enforcement of
+    perimeter contact rules, and other pivotal factors impacting the pro game.
+    From Xs and Os to keen historic analysis, this definitive volume will reveal
+    the intricacies of a beautiful game for savvy fans, players, and coaches
+    alike." -- Provided by publisher
+  author:
+    - family: Prada
+      given: Mike
+  citation-key: pradaSpacedOutHow2022
+  event-place: Chicago, Illinois
+  ISBN: 978-1-62937-886-2
+  issued:
+    - year: 2022
+  language: eng
+  note: 'OCLC: 1294282952'
+  number-of-pages: '374'
+  publisher: Triumph Books
+  publisher-place: Chicago, Illinois
+  source: Open WorldCat
+  title: >-
+    Spaced out: how the NBA's three-point revolution changed everything you
+    thought you knew about basketball
+  title-short: Spaced out
+  type: book
+
+- id: slaterJamesHardenDeath2021
+  abstract: >-
+    Catering to the whims of stars above all else doesn’t work—either in sports
+    or society at large.
+  accessed:
+    - year: 2023
+      month: 1
+      day: 19
+  author:
+    - family: Slater
+      given: Nick
+  citation-key: slaterJamesHardenDeath2021
+  container-title: Current Affairs
+  ISSN: 2471-2647
+  issued:
+    - year: 2021
+      month: 1
+      day: 21
+  language: en
+  source: Current Affairs
+  title: James Harden and the Death of Heliocentrism
+  type: article-magazine
+  URL: >-
+    https://www.currentaffairs.org/2021/01/james-harden-and-the-death-of-heliocentrism
+
+- id: taylorOffensivePhilosophyTaking2019
+  accessed:
+    - year: 2023
+      month: 1
+      day: 19
+  citation-key: taylorOffensivePhilosophyTaking2019
+  dimensions: '11:04'
+  director:
+    - family: Taylor
+      given: Ben
+  issued:
+    - year: 2019
+      month: 12
+      day: 21
+  source: YouTube
+  title: The offensive philosophy taking over the NBA | Heliocentrism & its history
+  type: motion_picture
+  URL: https://www.youtube.com/watch?v=r0934lGZ4dw
+
+- id: tien-danaLukaDoncicUpside2022
+  abstract: >-
+    Luka Doncic is playing to the point that he's consumed Dallas' entire
+    universe; at a certain point, he ceased being the Mavs' star and transformed
+    into their entire solar system.
+  accessed:
+    - year: 2023
+      month: 1
+      day: 19
+  author:
+    - family: Tien-Dana
+      given: Jack
+  citation-key: tien-danaLukaDoncicUpside2022
+  issued:
+    - year: 2022
+      month: 11
+      day: 15
+  title: Luka Doncic And The Upside And Perils Of Radical Heliocentrism
+  type: webpage
+  URL: >-
+    https://basketball.realgm.com/analysis/269386/Luka-Doncic-And-The-Upside-And-Perils-Of-Radical-Heliocentrism
+
+- id: tranHeliocentricityNBA2020
+  accessed:
+    - year: 2023
+      month: 1
+      day: 19
+  author:
+    - family: Tran
+      given: Kelly
+  citation-key: tranHeliocentricityNBA2020
+  container-title: Sports Analytics Group at Berkeley
+  issued:
+    - year: 2020
+      month: 11
+      day: 18
+  title: Heliocentricity in the NBA
+  type: post-weblog
+  URL: https://sportsanalytics.berkeley.edu/articles/heliocentricity.html
+...
