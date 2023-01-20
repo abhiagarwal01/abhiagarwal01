@@ -1,4 +1,9 @@
 /*-- scss:defaults --*/
-$primary: #5D4ECF !default;
+$primary: #7063cc;
 $font-family-sans-serif: 'Inter', sans-serif;
 $font-family-serif: 'Inter', sans-serif; // I do not like serif.
+$font-family-monospace: 'Fira Code VF', monospace;
+
+::selection {
+    background: rgba($primary, 0.5);
+}

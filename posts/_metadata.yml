@@ -9,6 +9,9 @@ toc: true
 csl: "modern-language-association.csl"
 format: 
   html:
+    anchor-sections: true
     code-fold: true
-    code-tools: true
+    code-tools:
+      source: repo
+      toggle: true
     link-external-newwindow: true

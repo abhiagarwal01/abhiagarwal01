@@ -38,9 +38,11 @@ website:
 
 format:
   html:
+    highlight-style: github
     theme:
       light: [litera, "assets/styles/theme.scss"]
       dark: [litera, "assets/styles/theme.scss", "assets/styles/dark.scss"]
     header-includes: >
       <link rel="preconnect" href="https://rsms.me/">
       <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css">
