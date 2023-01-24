@@ -1,5 +1,28 @@
 ---
 references:
+- id: ashbrockWhatUsageRate2021
+  abstract: >-
+    We explain what usage rate is, why you should care, and how it impacts other
+    metrics including efficiency
+  accessed:
+    - year: 2023
+      month: 1
+      day: 20
+  author:
+    - family: Ashbrock
+      given: Jonathan
+  citation-key: ashbrockWhatUsageRate2021
+  issued:
+    - year: 2021
+      month: 11
+      day: 2
+  language: en-US
+  section: Basketball
+  title: What is Usage Rate? And Why Do We Care? - The Data Jocks
+  title-short: What is Usage Rate?
+  type: post-weblog
+  URL: https://thedatajocks.com/what-is-usage-rate/
+
 - id: cheemaRiseHeliocentrismNBA2021
   abstract: >-
     It certainly feels like more and more NBA offenses are becoming
@@ -22,6 +45,94 @@ references:
   title: The Rise of Heliocentrism In NBA Offenses
   type: post-weblog
   URL: https://www.thespax.com/nba/the-rise-of-heliocentrism-in-nba-offenses/
+
+- id: dodsonThisDayNBA2017
+  abstract: >-
+    Michael Jordan with the game-winning assist — when’s the last time you
+    remember that happening? How about on June 13, 1997, in Game 6 of the NBA
+    Finals between …
+  accessed:
+    - year: 2023
+      month: 1
+      day: 20
+  author:
+    - family: Dodson
+      given: Aaron
+  citation-key: dodsonThisDayNBA2017
+  container-title: Andscape
+  issued:
+    - year: 2017
+      month: 6
+      day: 13
+  language: en-US
+  title: >-
+    On this day in NBA Finals history: Steve Kerr’s 17-foot jumper clinches
+    Bulls’ 1997 title
+  title-short: On this day in NBA Finals history
+  type: post-weblog
+  URL: >-
+    https://andscape.com/features/nba-finals-history-steve-kerr-17-foot-jumper-clinches-bulls-1997-title/
+
+- id: goldsteinAiringOpinionsJordan1992
+  accessed:
+    - year: 2023
+      month: 1
+      day: 20
+  author:
+    - family: Goldstein
+      given: Alan
+  citation-key: goldsteinAiringOpinionsJordan1992
+  container-title: Baltimore Sun
+  issued:
+    - year: 1992
+      month: 6
+      day: 18
+  language: English (United States), en-US
+  title: 'Airing opinions: Jordan best ever Bulls superstar making great case'
+  title-short: Airing opinions
+  type: webpage
+  URL: https://www.baltimoresun.com/news/bs-xpm-1993-06-18-1993169114-story.html
+
+- id: hubbardJordanHadGrow1991
+  accessed:
+    - year: 2023
+      month: 1
+      day: 20
+  author:
+    - family: Hubbard
+      given: Jan
+  citation-key: hubbardJordanHadGrow1991
+  container-title: Baltimore Sun
+  issued:
+    - year: 1991
+      month: 6
+      day: 11
+  language: English (United States), en-US
+  title: Jordan had to grow to trust teammates for Bulls to become great
+  type: webpage
+  URL: https://www.baltimoresun.com/news/bs-xpm-1991-06-11-1991162166-story.html
+
+- id: joravskyNobodyCheersJerry1990
+  abstract: >-
+    The Bulls are having one of their best years ever. Why can't the general
+    manager get a little respect?
+  accessed:
+    - year: 2023
+      month: 1
+      day: 20
+  author:
+    - family: Joravsky
+      given: Ben
+  citation-key: joravskyNobodyCheersJerry1990
+  container-title: Chicago Reader
+  issued:
+    - year: 1990
+      month: 4
+      day: 26
+  language: en-US
+  title: Nobody Cheers for Jerry Krause
+  type: webpage
+  URL: http://chicagoreader.com/news-politics/nobody-cheers-for-jerry-krause/
 
 - id: kocRisingTrendNBA2020
   abstract: >-
@@ -46,6 +157,151 @@ references:
   type: webpage
   URL: >-
     https://towardsdatascience.com/rising-trend-in-the-nba-heliocentrism-6bb12eba1c54
+
+- id: mccallumAirJordanAir1988
+  abstract: >-
+    On Sunday the Chicago bulls advanced to the second round of the NB A's
+    Eastern Conference playoffs for the first time in seven years, lugging with
+    them an
+  accessed:
+    - year: 2023
+      month: 1
+      day: 20
+  author:
+    - family: McCallum
+      given: Jack
+  citation-key: mccallumAirJordanAir1988
+  container-title: Sports Illustrated Vault
+  issued:
+    - year: 1988
+      month: 5
+      day: 16
+  language: en-us
+  title: Air Jordan, Air Bulls
+  type: webpage
+  URL: >-
+    https://vault.si.com/vault/1988/05/16/air-jordan-air-bulls-michael-jordan-soared-and-some-of-his-teammates-even-went-aloft-too-as-chicago-grounded-cleveland-in-the-playoffs
+
+- id: mccallumHornsDilemma1989
+  abstract: >-
+    No one by himself can carry a team through a season. If Michael has to do
+    this year after year, it will shorten his career. - null
+
+    Real men get their nails
+  accessed:
+    - year: 2023
+      month: 1
+      day: 20
+  author:
+    - family: McCallum
+      given: Jack
+  citation-key: mccallumHornsDilemma1989
+  container-title: Sports Illustrated Vault
+  issued:
+    - year: 1989
+      month: 3
+      day: 13
+  language: en-us
+  title: Horns Of A Dilemma
+  type: webpage
+  URL: >-
+    https://vault.si.com/vault/1989/03/13/horns-of-a-dilemma-michael-jordan-bulls
+
+- id: mccallumMISSIONIMPOSSIBLE1989
+  abstract: >-
+    For as far back as he can remember, Joe Dumars has played the tough guys.
+    "Neal Carter from Captain Shreve High in Shreveport," says Dumars, smiling
+    at the
+  accessed:
+    - year: 2023
+      month: 1
+      day: 20
+  author:
+    - family: McCallum
+      given: Jack
+  citation-key: mccallumMISSIONIMPOSSIBLE1989
+  container-title: Sports Illustrated Vault
+  issued:
+    - year: 1989
+      month: 11
+      day: 6
+  language: en-us
+  title: MISSION IMPOSSIBLE
+  type: webpage
+  URL: >-
+    https://vault.si.com/vault/1989/11/06/mission-impossible-no-one-shuts-down-michael-jordan-but-the-champion-detroit-pistons-have-developed-an-intricate-defensive-system-called-the-jordan-rules-that-comes-close-to-containing-him
+
+- id: nerkarNBAStarsAre2023
+  abstract: >-
+    It’s usually a special occasion when LeBron James has one of his patented
+    statistical eruptions. In Monday’s victory over the Houston Rockets, James
+    notched a h…
+  accessed:
+    - year: 2023
+      month: 1
+      day: 20
+  author:
+    - family: Nerkar
+      given: Santul
+  citation-key: nerkarNBAStarsAre2023
+  container-title: FiveThirtyEight
+  issued:
+    - year: 2023
+      month: 1
+      day: 20
+  language: en-US
+  title: NBA Stars Are Stuffing Stat Sheets Like Never Before. But Why?
+  type: post-weblog
+  URL: >-
+    https://fivethirtyeight.com/features/nba-stars-are-stuffing-stat-sheets-like-never-before-but-why/
+
+- id: nerkarNikolaJokicMVP2023
+  abstract: >-
+    Nikola Jokić has a tendency to make the spectacular look mundane. Take this
+    play during the third quarter of a recent game against the Boston Celtics,
+    just one …
+  accessed:
+    - year: 2023
+      month: 1
+      day: 20
+  author:
+    - family: Nerkar
+      given: Santul
+  citation-key: nerkarNikolaJokicMVP2023
+  container-title: FiveThirtyEight
+  issued:
+    - year: 2023
+      month: 1
+      day: 4
+  language: en-US
+  title: Nikola Jokić’s MVP Case Is Hidden In Plain Sight (Again)
+  type: post-weblog
+  URL: >-
+    https://fivethirtyeight.com/features/nikola-jokics-mvp-case-is-hidden-in-plain-sight-again/
+
+- id: paineHowDidBasketball2015
+  abstract: >-
+    Quick — which NBA player is most integral to his team’s offense? Which
+    player shoulders the biggest offensive burden? And to what degree are those
+    questions ev…
+  accessed:
+    - year: 2023
+      month: 1
+      day: 20
+  author:
+    - family: Paine
+      given: Neil
+  citation-key: paineHowDidBasketball2015
+  container-title: FiveThirtyEight
+  issued:
+    - year: 2015
+      month: 12
+      day: 17
+  language: en-US
+  title: How Did Basketball End Up With Four Versions (And Counting) Of One Stat?
+  type: post-weblog
+  URL: >-
+    https://fivethirtyeight.com/features/how-did-basketball-end-up-with-four-versions-and-counting-of-one-stat/
 
 - id: partnowNewNBAHeliocentrism2019
   abstract: >-
@@ -72,6 +328,55 @@ references:
   type: article-newspaper
   URL: >-
     https://theathletic.com/1427059/2019/12/06/the-new-nba-heliocentrism-how-teams-revolve-more-around-todays-stars-than-they-ever-have-before/
+
+- id: paukerKevinDurantOklahoma2010
+  abstract: >-
+    A day before LeBron's notorious "decision" rocked the landscape of modern
+    basketball, another choice was made...
+  accessed:
+    - year: 2023
+      month: 1
+      day: 20
+  author:
+    - family: Pauker
+      given: Lance
+  citation-key: paukerKevinDurantOklahoma2010
+  container-title: Bleacher Report
+  issued:
+    - year: 2010
+      month: 8
+      day: 16
+  language: en
+  title: 'Kevin Durant and the Oklahoma City Thunder: The Super Team''s Kryptonite?'
+  title-short: Kevin Durant and the Oklahoma City Thunder
+  type: webpage
+  URL: >-
+    https://bleacherreport.com/articles/420951-durant-and-the-oklahoma-city-thunder-the-super-teams-kryptonite
+
+- id: paukerWhyRussellWestbrook2010
+  abstract: >-
+    With the exception of Kobe Bryant, Dwyane Wade and LeBron James have
+    arguably been the top two players in the NBA for the past half decade...
+  accessed:
+    - year: 2023
+      month: 1
+      day: 20
+  author:
+    - family: Pauker
+      given: Lance
+  citation-key: paukerWhyRussellWestbrook2010
+  container-title: Bleacher Report
+  issued:
+    - year: 2010
+      month: 10
+      day: 28
+  language: en
+  title: >-
+    Why Russell Westbrook, Kevin Durant May Be A Better Combo Than LeBron,
+    D-Wade
+  type: webpage
+  URL: >-
+    https://bleacherreport.com/articles/474859-why-russell-westbrook-amp-kevin-durant-may-be-a-better-combo-than-lebron-amp-wade
 
 - id: pittsleyTripleDoubleHeliocentric2022
   abstract: It’s the latest in the Professor’s Corner series.
@@ -136,6 +441,51 @@ references:
   title-short: Spaced out
   type: book
 
+- id: raffertyWhatTriangleWhat2020
+  abstract: >-
+    The Chicago Bulls and Los Angeles Lakers ran the triangle during their
+    championship runs in the 1990s and 2000s. What is the offence and what made
+    it so special?
+  accessed:
+    - year: 2023
+      month: 1
+      day: 20
+  author:
+    - family: Rafferty
+      given: Scott
+  citation-key: raffertyWhatTriangleWhat2020
+  issued:
+    - year: 2020
+      month: 4
+      day: 17
+  language: en
+  title: >-
+    What is the triangle? What you need to know about the offence that helped
+    the Chicago Bulls and Los Angeles Lakers dominate the NBA
+  title-short: What is the triangle?
+  type: webpage
+  URL: >-
+    https://www.sportingnews.com/au/nba/news/what-is-the-triangle-what-you-need-to-know-about-the-offence-that-helped-the-chicago-bulls-and-los-angeles-lakers-dominate-the-nba/1807gy2ktq5il15iy9imbih6l1
+
+- id: sakamotoDIDALLSTARSFREEZE1985
+  accessed:
+    - year: 2023
+      month: 1
+      day: 20
+  author:
+    - family: Sakamoto
+      given: Bob
+  citation-key: sakamotoDIDALLSTARSFREEZE1985
+  container-title: Chicago Tribune
+  issued:
+    - year: 1985
+      month: 2
+      day: 12
+  language: English (United States), en-US
+  title: DID ALL-STARS FREEZE OUT JORDAN?
+  type: webpage
+  URL: https://www.chicagotribune.com/news/ct-xpm-1985-02-12-8501080975-story.html
+
 - id: slaterJamesHardenDeath2021
   abstract: >-
     Catering to the whims of stars above all else doesn’t work—either in sports
@@ -160,6 +510,30 @@ references:
   type: article-magazine
   URL: >-
     https://www.currentaffairs.org/2021/01/james-harden-and-the-death-of-heliocentrism
+
+- id: smithBullsOwnerQuieted1991
+  abstract: >-
+    The Bulls' run to the 1991 NBA title was certainly a team effort, from coach
+    Phil Jackson to superstar Michael Jordan to the 12th man on the bench. The
+    title didn't come without hard work, angry mome…
+  accessed:
+    - year: 2023
+      month: 1
+      day: 20
+  author:
+    - family: Smith
+      given: Sam
+  citation-key: smithBullsOwnerQuieted1991
+  container-title: The Oklahoman
+  issued:
+    - year: 1991
+      month: 12
+      day: 24
+  language: en-US
+  title: Bulls Owner Quieted Jordan Star Player Wanted to Run Team
+  type: webpage
+  URL: >-
+    https://www.oklahoman.com/story/news/1991/12/24/bulls-owner-quieted-jordan-star-player-wanted-to-run-team/62507195007/
 
 - id: taylorOffensivePhilosophyTaking2019
   accessed:

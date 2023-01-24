@@ -1,11 +1,10 @@
 freeze: false
 title-block-banner: true
+citation: true
 execute:
   cache: true
-citation: true
 nocite: |
   @*
-toc: true
 csl: "modern-language-association.csl"
 format: 
   html:
@@ -15,3 +14,5 @@ format:
       source: repo
       toggle: true
     link-external-newwindow: true
+    toc: true
+    toc-location: left

@@ -39,6 +39,7 @@ website:
 format:
   html:
     highlight-style: github
+    html-math-method: mathml
     theme:
       light: [litera, "assets/styles/theme.scss"]
       dark: [litera, "assets/styles/theme.scss", "assets/styles/dark.scss"]
