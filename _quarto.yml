@@ -2,10 +2,11 @@ project:
   type: website
   preview:
     port: 8012
-
+filters:
+   - include-code-files
 website:
   title: Abhi Agarwal
-  site-url: "https://abhiaagarwal.com"
+  site-url: "https://abhi.rodeo"
   repo-url: "https://github.com/abhiagarwal01/abhiagarwal01"
   twitter-card: true
   open-graph:

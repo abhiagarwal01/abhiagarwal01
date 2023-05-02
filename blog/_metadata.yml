@@ -1,6 +1,7 @@
 freeze: false
 title-block-banner: true
 citation: true
+highlight-style: a11y
 execute:
   cache: true
 nocite: |
@@ -9,10 +10,11 @@ csl: "modern-language-association.csl"
 format: 
   html:
     anchor-sections: true
-    code-fold: true
+    code-fold: false
     code-tools:
       source: repo
       toggle: true
     link-external-newwindow: true
     toc: true
     toc-location: left
+  ipynb: default

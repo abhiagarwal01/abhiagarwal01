@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.2.2",
+    "Version": "4.3.0",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -9,18 +9,25 @@
     ]
   },
   "Python": {
-    "Version": "3.11.1",
+    "Version": "3.11.3",
     "Type": "virtualenv",
     "Name": "./.venv"
   },
   "Packages": {
     "renv": {
       "Package": "renv",
-      "Version": "0.16.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "c9e8442ab69bc21c9697ecf856c1e6c7",
-      "Requirements": []
+      "Version": "0.17.3-23",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "rstudio",
+      "RemoteRepo": "renv",
+      "RemoteRef": "0.17.3-23",
+      "RemoteSha": "81fecb07fcc78cabb61b5309875e59484727b090",
+      "Requirements": [
+        "utils"
+      ],
+      "Hash": "c8a17dae99404553f250bc07d1cff43c"
     }
   }
 }

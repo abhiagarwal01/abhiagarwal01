@@ -1,9 +1,13 @@
 /*-- scss:defaults --*/
-$primary: #7063cc;
+$primary: #9753b8;
 $font-family-sans-serif: 'Inter', sans-serif;
 $font-family-serif: 'Inter', sans-serif; // I do not like serif.
 $font-family-monospace: 'Fira Code VF', monospace;
 
 ::selection {
-    background: rgba($primary, 0.5);
+    background: rgba($primary, 0.3);
+}
+
+code {
+    color: $primary !important
 }

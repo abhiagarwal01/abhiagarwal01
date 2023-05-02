@@ -3,9 +3,9 @@ title: "Break up the big ball: Heliocentric Offenses in the NBA"
 description: "The modern NBA is dominated by its best players dominating the ball. I investigate whether this strategy is conducive to winning games and postseason success."
 author: "Abhi Agarwal"
 date: "2022-01-20"
-draft: true
 categories: [nba, data-science, rlang, python]
 bibliography: "citations.yaml"
+draft: true
 ---
 
 # Introduction

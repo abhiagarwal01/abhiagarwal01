@@ -1,0 +1,44 @@
+---
+title: "I wrote an app that won a Senate Race — knowing jack sh*t about development"
+description: "I wrote a full-stack application for Senator Ed Markey's campaign without knowing literally anything about full-stack development. That said app was viewed hundreds of thousands of times, painted on the side of a bus, and helped Ed Markey eventually defeat Joe Kennedy in one of the biggest upsets in Massachusetts history. Here's how I did it"
+author: "Abhi Agarwal"
+date: "2023-03-23"
+categories: [politics, flutter]
+draft: true
+---
+
+# Introduction
+
+[](markey_map_bus.avif){.preview-image}
+
+I think most of us have a some sort of story about the Summer of 2020. COVID-19 was ripping through our nation, and I spent most of my time socially isolated and in a lull, doing nothing. I also built an interactive map that helped swing a Senate race.
+
+In May 2020, I joined the re-election campaign for Senator Ed Markey. I had previously met Ed on an elevator a couple years prior. While I was far more politically engaged back then than I am now, I namely did it out of a sense for finding something productive to do with my life, and a dislike [towards](https://en.wikipedia.org/wiki/Kennedy_family) [political](https://people.com/politics/untold-story-of-rosemary-kennedy-and-her-disastrous-lobotomy/) [dynasties](https://www.danspapers.com/2019/09/kennedys-used-their-power-to-kill-wind-farm/). 
+
+In a political environment fervent with ideological tussles, and a literal environment where we couldn't leave our homes, that Senate campaign was heated. Joe Kennedy accused Ed of being an absentee Senator — Ed highlighted his years of experience serving the Commonwealth of Massachussetts, and most importantly accused Joe of being a nepo baby.  Millions of dollars flowed into a primary in arguably the most "blue" state in the nation, while political heavyweights, such as [Alexandria Ocasio-Cortez](https://www.politico.com/story/2019/09/13/ocasio-cortez-endorses-markey-massachusetts-1495648), [Nancy Pelosi](https://www.politico.com/news/2020/08/20/nancy-pelosi-endorses-joe-kennedy-senate-race-399447), and Wheezer got involved.
+
+Unable to campaign by knocking  doors, we campaigned on virtual doors, activating voters where they were most likely to be – the internet. I was brought on due to my expertise in digital campaigning, and most crucially, free time as a student. Initially down 14 points in polls and declared dead in the water, we were able to decisively beat Joe Kennedy.
+
+Well, two and a half years have passed since then. Ed Markey is around a thirdway through his term. I don't know what Joe Kennedy is doing, but there's a [podcast about his family's dynasty now for some reason](https://kennedydynasty.com). Having recently graduated College, I now work as a Junior Data Engineer for the wonderful [SOPHiA Genetics](https://www.sophiagenetics.com/). I think now's about time that I can provide a little bit of retrospective on how I, having previously never written any code professionally in my entire life, was able to develop and deploy a full-stack application in under 30 days.
+
+# So how the hell are you supposed to campaign in a pandemic?
+
+Campaigns are all about rolling back your sleeves, knocking on doors, and evangelizing for approximately 2 minutes on the doorsteps of our identified voters in our little database of voters^[That database is provided by NGP VAN, best known for the Votebuilder SaaS. I don't intend on ever getting involved in the political world ever again, so I can say what many Democratic insiders can't say out loud — they're a terrible, antidemocratic company]. 
+
+Let me be clear. My mom, for some reason, made my family friend teach me C++ when I was 11. The furthest I got was coding a game of checkers before quitting after failing to understand how pointers work^. I then picked up Python to help me automate my high school math homework since it was boring. I was a hobbyist, and had never deployed a single piece of code professionally in my life. I didn't even know what deployment even meant. And I was being asked to deploy a full-stack application for free.
+
+Naturally, I accepted.
+
+# Introducing: The Markey Map
+
+I chose to use [flutter](flutter.io) as my framework of choice. Why? We wanted a performance web application. Having known C++, I was familiar with Strong Typing. The proper thing would have been to write it in React and/or Typescript. 
+
+So yeah, we used Google Sheets as a backend.
+
+# Everything's burning down
+
+I woke up to a few texts saying "Hey Abhi, why's the website down?"
+
+Well, at least he managed to turn it into some excellent marketing. 
+
+# Yes, I was never paid
