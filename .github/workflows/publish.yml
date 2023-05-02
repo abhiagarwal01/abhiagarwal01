@@ -52,7 +52,6 @@ jobs:
       - name: Activate Python .venv
         run: |
           . .venv/bin/activate
-          python -m pip install -r requirements.txt
           echo PATH=$PATH >> $GITHUB_ENV
 
       - name: Render Quarto project
