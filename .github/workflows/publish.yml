@@ -48,8 +48,12 @@ jobs:
         uses: r-lib/actions/setup-renv@v2
         with:
           cache-version: 3
+      
+      - name: Activate Python .venv
+        run: |
+          . .venv/bin/activate
 
-      - name: Render Quarto Project
+      - name: Render Quarto project
         uses: quarto-dev/quarto-actions/render@v2
 
       - name: Upload artifact
