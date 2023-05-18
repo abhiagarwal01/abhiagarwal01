@@ -28,14 +28,11 @@ website:
     title: false
     pinned: true
     right:
-      - about.qmd
-      - blog.qmd
+      - about/index.qmd
+      - blog/index.qmd
       - icon: github
         href: https://github.com/abhiagarwal01
         aria-label: Github
-      - icon: twitter
-        href: https://twitter.com/abhiaaaaagarwal
-        aria-label: Twitter
 
 format:
   html:
