@@ -1,6 +1,5 @@
 freeze: false
 title-block-banner: true
-citation: true
 highlight-style: a11y
 execute:
   cache: true
