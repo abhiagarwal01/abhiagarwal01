@@ -33,6 +33,8 @@ website:
       - icon: github
         href: https://github.com/abhiagarwal01
         aria-label: Github
+  page-footer: 
+    left: Abhi Agarwal {{< fa regular copyright >}} 2023<br>[Code licensed under MIT and written content under CC-BY-SA 4.0](LICENSE)<br>Made with {{< fa hat-cowboy >}} and [quarto](https://quarto.org)
 
 format:
   html:

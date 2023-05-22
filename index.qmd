@@ -1,4 +1,8 @@
 ---
-title: "Index"
+page-layout: full
 comments: false
 ---
+
+::: {.h1 #hello-message}
+Hello there 🤠!
+:::
