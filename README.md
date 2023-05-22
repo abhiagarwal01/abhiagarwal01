@@ -1,6 +1,6 @@
-# Hey, you there, hey, hey, you there
+# Howdy 🤠!
 
-I'm Abhi Agarwal, and I'm a Data Engineer and Analyst for [SOPHiA Genetics](https://www.sophiagenetics.com/).
+I'm Abhi Agarwal, and I work with data for [SOPHiA Genetics](https://www.sophiagenetics.com/).
 
 I code primarily in Python and Rust. I'm interested in software that can mathematically verify itself for both performance and security-critical applications.
 

@@ -4,5 +4,5 @@ comments: false
 ---
 
 ::: {.h1 #hello-message}
-Hello there 🤠!
+Howdy 🤠!
 :::
