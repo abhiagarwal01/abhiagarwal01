@@ -11,5 +11,10 @@ listing:
   filter-ui: true
   feed: true
 page-layout: full
-title-block-banner: true
+format: 
+  html:
+    anchor-sections: false
+    code-fold: false
+    code-tools: false
+    toc: false
 ---
