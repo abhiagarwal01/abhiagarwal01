@@ -7,7 +7,7 @@ filters:
 website:
   title: Abhi Agarwal
   site-url: "https://abhi.rodeo"
-  repo-url: "https://github.com/abhiagarwal01/abhiagarwal01"
+  repo-url: "https://github.com/abhiaagarwal/abhiaagarwal"
   twitter-card: true
   open-graph:
     locale: en_US
@@ -17,7 +17,7 @@ website:
     anonymize-ip: true
   comments:
     giscus:
-      repo: "abhiagarwal01/abhiagarwal01"
+      repo: "abhiaagarwal/abhiaagarwal"
       repo-id: "R_kgDOIZa_6w"
       category: "Comments"
       category-id: "DIC_kwDOIZa_684CTpsj"
@@ -31,8 +31,11 @@ website:
       - about/index.qmd
       - blog/index.qmd
       - icon: github
-        href: https://github.com/abhiagarwal01
+        href: https://github.com/abhiaagarwal
         aria-label: Github
+      - icon: linkedin
+        href: https://linkedin.com/in/abhiaagarwal
+        aria-label: Linkedin
   page-footer: 
     left: |
       Copyright {{< fa regular copyright >}} 2023 by Abhi Agarwal<br>
