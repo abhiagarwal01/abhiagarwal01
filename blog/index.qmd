@@ -1,9 +1,8 @@
 ---
 title: "Blog"
-description: "Musings about Infrastructure, Machine Learning, Data Engineering, and the NBA"
+description: "Musings from a guy"
 comments: false
 listing:
-  contents: posts
   sort: "date desc"
   type: default
   categories: unnumbered
@@ -11,7 +10,7 @@ listing:
   filter-ui: true
   feed: true
 page-layout: full
-format: 
+format:
   html:
     anchor-sections: false
     code-fold: false

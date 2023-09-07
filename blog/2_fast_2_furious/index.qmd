@@ -1,13 +1,15 @@
 ---
 title: "2 Fast 2 Furious: Every movie should be like this"
+description: "One man's journey for the perfect movie title"
 author: "Abhi Agarwal"
 date: "2023-09-06"
 categories: [movies, python]
 ---
 
-I really do think *2 Fast 2 Furious* has the greatest movie title of all-time. It's perfect — it keeps the consistent branding of the first film, uses the "two" as both an adjective and a number, it's fucking cool. It's a masterpiece. 
+I really do think *2 Fast 2 Furious* has the greatest movie title of all-time. It's perfect — it keeps the consistent branding of the first film, uses the "two" as both an adjective and a number, it's fucking cool. It's a masterpiece.
 
-I think more movies should be named like this. Anyways, I downloaded a dump of [TMDB](https://developer.themoviedb.org/docs/daily-id-exports) because I wanted to see how many movies can fit in this paradigm. 
+I think more movies should be named like this. Anyways, I downloaded a dump of [TMDB](https://developer.themoviedb.org/docs/daily-id-exports) because I wanted to see how many movies can fit in this paradigm.
+
 ```{python}
 import json
 import re
@@ -27,7 +29,6 @@ with pl.Config() as cfg:
 ```
 
 840,000 movies in the TMDB database! Pretty cool. Let's see how many match our paradigm. Here's the regex that says *please give me strings that are only the pattern {word} {word} 2*: `^\w+ \w+ 2$`.
-
 
 ```{python}
 two_regex_two_me = r"^\w+ \w+ 2$"
