@@ -1,8 +1,0 @@
----
-title: "My quest for the perfect gaming device"
-description: ""
-author: "Abhi Agarwal"
-date: "2023-06-03"
-categories: [gaming, hardware]
-draft: true
----

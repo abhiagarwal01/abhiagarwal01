@@ -1,0 +1,54 @@
+---
+title: "2 Fast 2 Furious: Every movie should be like this"
+author: "Abhi Agarwal"
+date: "2023-09-06"
+categories: [movies, python]
+---
+
+I really do think *2 Fast 2 Furious* has the greatest movie title of all-time. It's perfect — it keeps the consistent branding of the first film, uses the "two" as both an adjective and a number, it's fucking cool. It's a masterpiece. 
+
+I think more movies should be named like this. Anyways, I downloaded a dump of [TMDB](https://developer.themoviedb.org/docs/daily-id-exports) because I wanted to see how many movies can fit in this paradigm. 
+```{python}
+import json
+import re
+from pathlib import Path
+import polars as pl
+from IPython.display import display
+
+movie_ids_file = Path("movie_ids_09_05_2023.json")
+with movie_ids_file.open("r") as file:
+     # stupidest workaround you've ever seen
+    valid_json = f"[{','.join(file.readlines())}]"
+    raw_df = pl.from_dicts(json.loads(valid_json)).select("original_title", "popularity")
+
+with pl.Config() as cfg:
+    cfg.set_tbl_rows(10)
+    display(raw_df)
+```
+
+840,000 movies in the TMDB database! Pretty cool. Let's see how many match our paradigm. Here's the regex that says *please give me strings that are only the pattern {word} {word} 2*: `^\w+ \w+ 2$`.
+
+
+```{python}
+two_regex_two_me = r"^\w+ \w+ 2$"
+
+two_movies_two_me = raw_df.filter(pl.col("original_title").str.contains(two_regex_two_me))
+with pl.Config() as cfg:
+    cfg.set_tbl_rows(20)
+    display(two_movies_two_me)
+```
+
+881 movies. So out of our database, 0.1% of movies fall under this naming scheme. Now let's make those lame-ass names into something way cooler. 
+
+```{python}
+movie_names = two_movies_two_me.select("original_title").to_series().to_list()
+
+def make_cooler(movie_name: str) -> str:
+    fast, furious, _ = movie_name.split(" ")
+    return f"2 {fast} 2 {furious}"
+
+cooler_movie_names = [make_cooler(movie) for movie in movie_names]
+display(cooler_movie_names)
+```
+
+Awesome.

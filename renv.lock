@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.3.0",
+    "Version": "4.3.1",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -9,7 +9,7 @@
     ]
   },
   "Python": {
-    "Version": "3.11.3",
+    "Version": "3.11.4",
     "Type": "virtualenv",
     "Name": "./.venv"
   },
