@@ -4,6 +4,7 @@ description: "I came into OMSCS as someone with no formal programming experience
 author: "Abhi Agarwal"
 date: "2024-03-05"
 categories: [omscs]
+draft: true
 ---
 
 # Introduction
