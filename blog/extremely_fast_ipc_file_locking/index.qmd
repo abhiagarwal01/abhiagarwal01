@@ -1,0 +1,9 @@
+---
+title: "Extremely fast zero-trust IPC on Linux with `memfd_create` and abusing file locking"
+description: "By (ab)using `memfd_create` and `fcntl` advisory file-locking, I implement an extremely fast method for IPC between two processes that don't trust each other in Linux"
+author: "Abhi Agarwal"
+date: "2024-03-05"
+categories: [c, linux]
+---
+
+todo!()
