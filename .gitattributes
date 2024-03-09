@@ -117,11 +117,12 @@
 *.rds   binary
 *.Rd    text
 *.Rdx   binary
-*.Rmd	text
-*.R  	text
+*.Rmd	  text
+*.R  	  text
 
 # Basic .gitattributes for a Quarto repo.
 
 # Source files
 # ============
-*.qmd   text
+*.qmd       text
+_freeze/*   linguist-generated=true
