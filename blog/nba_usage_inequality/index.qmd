@@ -12,7 +12,7 @@ draft: true
 
 The NBA, more than ever, is a league dominated by its superstars. Superstars that happen to also dominate the ball.
 
-The poster child of this movement, James Harden, and his team, the Houston Rockets, was lauded with strong success in the regular season, leading to record wins and a MVP for Harden — but notably failed to reach the NBA Finals even once in their four-season run. Russell Westbrook won an MVP posting one of the most heliocentric seasons ever, but has little postseason success to show for his entire career. And today, Luka Doncic and Trae Young, two extraordinary young talents who were drafted in 2018 together^[Luka was drafted 3rd overall by the Hawks and Trae was drafted 5th overall by the Mavericks — however, the Hawks believed both prospects to be equal, so they traded Trae for Luka and a first round pick in 2019, who became Cam Reddish.], both play in heliocentric offenses where they are the primary commanders. Both have had postseason success, but are yet to break through to the Finals. 
+The poster child of this movement, James Harden, and his team, the Houston Rockets, was lauded with strong success in the regular season, leading to record wins and a MVP for Harden — but notably failed to reach the NBA Finals even once in their four-season run. Russell Westbrook won an MVP posting one of the most heliocentric seasons ever, but has little postseason success to show for his entire career. And today, Luka Doncic and Trae Young, two extraordinary young talents who were drafted in 2018 together^[Luka was drafted 3rd overall by the Hawks and Trae was drafted 5th overall by the Mavericks — however, the Hawks believed both prospects to be equal, so they traded Trae for Luka and a first round pick in 2019, who became Cam Reddish.], both play in heliocentric offenses where they are the primary commanders. Both have had postseason success, but are yet to break through to the Finals.
 
 ![The Toronto Raptors played the Dallas Mavericks on November 26, 2022 and employed a strategy of trapping Luka Doncic, forcing him to pass up the ball instantly and his team play 4v3. The Raptors won 105-100.](raptors_trap_luka.jpg){.preview-image}
 
@@ -28,11 +28,11 @@ Let's begin with a list of questions I hope to answer:
 
 # Defining Heliocentrism
 
-The phrase "Heliocentric" was used by Copernicus in 1543 in his seminal model describing the orientation of the stars and planets, but in the Basketball lexicon, was first used by *The Athletic* writer Seth Partnow in his 2019 piece, titled "The New NBA Heliocentrism" [@partnowNewNBAHeliocentrism2019]^[Although this was the first prominent use of the term, it was technically *not* the first. That honor goes to Lance Pauker of the Bleacher Report, who used it to describe the Kevin Durant's Oklahoma City Thunder in 2010 [@paukerKevinDurantOklahoma2010]. Sorry Lance, you have been lost to history, but I remember you!]. Similar to Copernicus, Parnow invoked the imagery of the a star player, well, acting like a star with the other players 
- 
+The phrase "Heliocentric" was used by Copernicus in 1543 in his seminal model describing the orientation of the stars and planets, but in the Basketball lexicon, was first used by *The Athletic* writer Seth Partnow in his 2019 piece, titled "The New NBA Heliocentrism" [@partnowNewNBAHeliocentrism2019]^[Although this was the first prominent use of the term, it was technically *not* the first. That honor goes to Lance Pauker of the Bleacher Report, who used it to describe the Kevin Durant's Oklahoma City Thunder in 2010 [@paukerKevinDurantOklahoma2010]. Sorry Lance, you have been lost to history, but I remember you!]. Similar to Copernicus, Parnow invoked the imagery of the a star player, well, acting like a star with the other players
+
 However, the concept of heliocentrism has been intimately tied with the history of the NBA, and we can choose no better an example of a player than most consider to be the Greatest of All-Time, Michael Jordan.
 
-Michael Jordan came into the league a scoring phenomenon. Averaging over 30+ points per game from his second season onwards, Jordan was blessed with multiple MVPs, scoring titles, and numerous other personal accolades. However, Jordan's Bulls struggled in the playoffs. He failed to make the Finals in his first seven seasons. He even recieved criticism from the media as a perceived selfish player who failed to get his teammates involved. Or perhaps he was being failed by his teammates. Regardless, the Bulls first achieved their greatest success while running an offensive system known as the "Triangle", where Jordan, his co-star Scottie Pippen, and later Dennis Rodman operated on a different part of the floor, whose verticies formed a triangle. 
+Michael Jordan came into the league a scoring phenomenon. Averaging over 30+ points per game from his second season onwards, Jordan was blessed with multiple MVPs, scoring titles, and numerous other personal accolades. However, Jordan's Bulls struggled in the playoffs. He failed to make the Finals in his first seven seasons. He even recieved criticism from the media as a perceived selfish player who failed to get his teammates involved. Or perhaps he was being failed by his teammates. Regardless, the Bulls first achieved their greatest success while running an offensive system known as the "Triangle", where Jordan, his co-star Scottie Pippen, and later Dennis Rodman operated on a different part of the floor, whose verticies formed a triangle.
 
 # Measuring Heliocentrism
 
@@ -44,7 +44,7 @@ $$
 USG = \frac{(FGA_{player} + 0.44 \cdot FTA_{player} + TOV_{player}) \cdot (MP_{team} / 5)}{MP_{player} \cdot (FGA_{team} + 0.44 \cdot FTA_{team} + TOV_{team})}
 $$
 
-This jumble of symbols can be simplified heavily to make it a bit more intuitive. 
+This jumble of symbols can be simplified heavily to make it a bit more intuitive.
 
 $$
 USG = \frac{1}{5} \cdot \frac{MP_{team}}{MP_{player}} \cdot \frac{FGA_{player} + 0.44 \cdot FTA_{player} + TOV_{player}}{FGA_{team} + 0.44 \cdot FTA_{team} + TOV_{team}}
@@ -64,7 +64,7 @@ We will now focus on Touches and Time of Possession
 
 # The Efficacy of Heliocentrism
 
-# Why do teams play Heliocentric? 
+# Why do teams play Heliocentric?
 
 ## Lack of Talent?
 

@@ -5,7 +5,7 @@ execute:
 nocite: |
   @*
 csl: "modern-language-association.csl"
-format: 
+format:
   html:
     anchor-sections: true
     code-fold: false

@@ -39,7 +39,7 @@ with pl.Config() as cfg:
     display(two_movies_two_me)
 ```
 
-881 movies. So out of our database, 0.1% of movies fall under this naming scheme. Now let's make those lame-ass names into something way cooler. 
+881 movies. So out of our database, 0.1% of movies fall under this naming scheme. Now let's make those lame-ass names into something way cooler.
 
 ```{python}
 movie_names = two_movies_two_me.select("original_title").to_series().to_list()

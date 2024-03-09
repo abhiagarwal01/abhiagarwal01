@@ -76,10 +76,10 @@ strict = true
 
 ::: {.callout-note collapse="true"}
 ### Why I don't use `pre-commit`
-`pre-commit` is a popular tool for ensuring that tests, linting, formatting, etc. is done before as a git hook before comitting your code. I'm not a big fan of its design. I heavily dislike the way it runs tools, essentially pulling the tool from the internet and running it in an isolated environment. It seems like unncessary duplication given my dev tools are already installed in my venv, and also requires you to take care that the version number in the `pre-commit` config matches the declared version in `pyproject.toml`, which gets tedious fast. I prefer using CI as my source of truth. 
+`pre-commit` is a popular tool for ensuring that tests, linting, formatting, etc. is done before as a git hook before comitting your code. I'm not a big fan of its design. I heavily dislike the way it runs tools, essentially pulling the tool from the internet and running it in an isolated environment. It seems like unncessary duplication given my dev tools are already installed in my venv, and also requires you to take care that the version number in the `pre-commit` config matches the declared version in `pyproject.toml`, which gets tedious fast. I prefer using CI as my source of truth.
 :::
 
-While this stuff may seem trivial, setting up a good tooling environment is vital. Python is a deeply complicated beast, and not a single human alive has the capacity to write good, maintainable code without someone holding your hand and slapping you if you're wrong. By declaring your dev tools in your manifest, it creates a reproducible environment so any person in the world can immediately start contributing to your project. We've given the responsibilities to the impartial computer, no one has to argue anymore about stylistic checks. 
+While this stuff may seem trivial, setting up a good tooling environment is vital. Python is a deeply complicated beast, and not a single human alive has the capacity to write good, maintainable code without someone holding your hand and slapping you if you're wrong. By declaring your dev tools in your manifest, it creates a reproducible environment so any person in the world can immediately start contributing to your project. We've given the responsibilities to the impartial computer, no one has to argue anymore about stylistic checks.
 
 ## Mirroring the API through directory structure
 
@@ -137,17 +137,17 @@ If you couldn't tell, I freaking *love* pydantic.
 As a test, let's take our JSON payload and convert it into a Pydantic model.
 
 ```{python}
-from pathlib import Path
-from rich.pretty import pprint
-import json
-from IPython.display import display
+# from pathlib import Path
+# from rich.pretty import pprint
+# import json
+# from IPython.display import display
 
-json_payload = json.loads((Path(".") / "assets" / "code" / "leagues_payload.json").read_text())
+# json_payload = json.loads((Path(".") / "assets" / "code" / "leagues_payload.json").read_text())
 
-from pydantic.analyzed_type import AnalyzedType
+# from pydantic.analyzed_type import AnalyzedType
 
-parsed_model = AnalyzedType(list[League]).validate_python(json_payload["leagues"])
-pprint(parsed_model[0].model_dump())
+# parsed_model = AnalyzedType(list[League]).validate_python(json_payload["leagues"])
+# pprint(parsed_model[0].model_dump())
 ```
 
 ## (Ab)using polymorphism
@@ -165,7 +165,7 @@ As a library author, there are three approaches I can take here:
 ### Async-only library
 
 With the async version, we provide the "correct" API, but Async code *infects* other code as when you call an async call, all your code up the stack **must** be async. This is known as the [function coloring problem](https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/). This wouldn't be a huge problem if the Python community had async habits, but unfortunately the functionality was tacked onto python years into its lifecycle, so most code assumes a sync context^[Just from personal experience in the sports data science community, I have yet to see a single use of async in the wild.]. I want people to use this library, I'd be losing active consumers who choose not to bother rewriting all their code. In addition, I want this package to be accessible to R users, and
-`reticulate` currently [does not support async execution](https://github.com/rstudio/reticulate/issues/515). 
+`reticulate` currently [does not support async execution](https://github.com/rstudio/reticulate/issues/515).
 
 As much as I dream of a world where pure async is feasible, we're not there yet.
 

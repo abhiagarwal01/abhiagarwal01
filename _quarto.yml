@@ -11,10 +11,6 @@ website:
   twitter-card: true
   open-graph:
     locale: en_US
-  google-analytics:
-    tracking-id: "G-LL44DGVQD9"
-    storage: none
-    anonymize-ip: true
   comments:
     giscus:
       repo: "abhiaagarwal/abhiaagarwal"
@@ -36,7 +32,7 @@ website:
       - icon: linkedin
         href: https://linkedin.com/in/abhiaagarwal
         aria-label: Linkedin
-  page-footer: 
+  page-footer:
     left: |
       Copyright {{< fa regular copyright >}} 2023 by Abhi Agarwal<br>
       [Code licensed under MIT and written content under CC-BY-SA 4.0](LICENSE)
@@ -53,5 +49,5 @@ format:
     header-includes: >
       <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤠</text></svg>">
       <link rel="preconnect" href="https://rsms.me/">
-      <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css">
+      <link rel="stylesheet" as="font" href="https://rsms.me/inter/inter.css">
+      <link rel="stylesheet" as="font" href="https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css">

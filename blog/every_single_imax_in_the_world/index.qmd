@@ -46,7 +46,7 @@ Still a bunch of junk, but a needle in our haystack. Notice there seems to be so
 
 ![](screenshots/algolia_preview.png)
 
-Holy shit! That's our sauce. 
+Holy shit! That's our sauce.
 
 If we right click that specific XHR request and click Copy > Copy as cURL, we get a string that allows us to perfectly emulate the request, including the specific headers and cookie information. Now, let me introduce my second favorite invention, [curlconverter.com](https://curlconverter.com). By taking this string and copy-pasting, we can get a snippet of code that perfectly replicates this in your favorite programming language.
 
@@ -118,7 +118,7 @@ theaters_df = pl.from_dicts(result["hits"])
 theaters_df.glimpse()
 ```
 
-We're done! That's every single IMAX Theater in the world, approximately, uh, 1000? 
+We're done! That's every single IMAX Theater in the world, approximately, uh, 1000?
 
 That doesn't pass the sniff test.
 
@@ -135,11 +135,11 @@ We see that the `nbHits` is 1748. Algolia's search API only allows us to access 
 
 Let's go back to the drawing board. How did the original Algolia API work for figuring out which IMAX is around me? The original query string used on the website is `'{"query":"","aroundLatLng":"42.65717,-71.140878","aroundRadius":500000,"attributesToRetrieve":["*"],"hitsPerPage":30}`. Searching google for `aroudnLatLng` leads to [documentation](https://www.algolia.com/doc/api-reference/api-parameters/aroundLatLng/) that links to Algolia's [guide on geolocation](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/). Perhaps we could just pick a bunch of random points and radiuses and hope we cover the earth?
 
-Sadly, this is probably not a great idea. The mathematical problem of fitting a bunch of circles such that it covers a surface is [difficult](https://puzzling.stackexchange.com/questions/110592/can-you-irrigate-your-lawn-with-23-sprinklers/110608#110608), and I'm already very much a washed-up mathematician. I also want to be respectful of IMAX's backend and not submit a stupid amount of requests, given I looked at Algolia's [pricing](https://www.algolia.com/pricing/). 
+Sadly, this is probably not a great idea. The mathematical problem of fitting a bunch of circles such that it covers a surface is [difficult](https://puzzling.stackexchange.com/questions/110592/can-you-irrigate-your-lawn-with-23-sprinklers/110608#110608), and I'm already very much a washed-up mathematician. I also want to be respectful of IMAX's backend and not submit a stupid amount of requests, given I looked at Algolia's [pricing](https://www.algolia.com/pricing/).
 
-There is a solution, as Algolia also features the ability to search within a [rectangular box](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/how-to/filter-results-inside-a-rectangle-area/). Given the entire world is standardized by the measures of latitude and longitude, all we have to do is split up the world into a bunch of squares and search within. 
+There is a solution, as Algolia also features the ability to search within a [rectangular box](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/how-to/filter-results-inside-a-rectangle-area/). Given the entire world is standardized by the measures of latitude and longitude, all we have to do is split up the world into a bunch of squares and search within.
 
-I'm generally directionally challenged, so a special shoutout to ChatGPT who gave me the rectangulars used to divide the world into parts. 
+I'm generally directionally challenged, so a special shoutout to ChatGPT who gave me the rectangulars used to divide the world into parts.
 
 ```{python}
 quadrants = [
@@ -187,7 +187,7 @@ missing_geoloc_theaters = theaters_df.filter(pl.col("_geoloc").is_null())
 missing_geoloc_theaters.glimpse()
 ```
 
-The `path` column corresponds to `imax.com/theatre/{path}`, and I'm met with a `Application error: a client-side exception has occurred (see the browser console for more information).`, and the console tells me that it has to do with a null-reference error. I guess these theaters aren't ready for showtime yet ¯\\\_(ツ)_/¯ 
+The `path` column corresponds to `imax.com/theatre/{path}`, and I'm met with a `Application error: a client-side exception has occurred (see the browser console for more information).`, and the console tells me that it has to do with a null-reference error. I guess these theaters aren't ready for showtime yet ¯\\\_(ツ)_/¯
 
 Since I don't want to pollute my data, I'm gonna ignore them. Let's assemble our final dataframe, dropping some unneeded columns.
 
@@ -216,7 +216,7 @@ show(all_theaters_df.drop(["slug", "path"]), scrollX=True)
 
 # Map of every IMAX in the world
 
-Using this data, we can create a map of every IMAX in the world. 
+Using this data, we can create a map of every IMAX in the world.
 
 ```{python}
 # | code-fold: true
