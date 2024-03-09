@@ -1,0 +1,264 @@
+---
+title: "Manipulating an API to find every single IMAX in the world"
+description: "IMAX Theaters have seen a resurrgence with the advent of cinematic blockbusters like Dune and Oppenheimer. However, getting information about these IMAXes is notoriously difficult. I scrape the underlying Algolia-based search engine on imax.com to find every single IMAX location in the world."
+author: "Abhi Agarwal"
+date: "2024-03-08"
+categories: [python, movies]
+draft: true
+---
+
+```{python}
+# | echo: false
+import polars as pl
+import pandas as pd
+from itables import show, init_notebook_mode
+import itables.options as opt
+from ipyleaflet import Map, Marker, basemaps, MarkerCluster, AwesomeIcon
+from ipywidgets import Layout, HTML
+
+opt.maxBytes = 0
+init_notebook_mode(all_interactive=True, connected=True)
+```
+
+After not really caring about movies, I suddenly developed an obsession with watching movies. Not necessarily the movies themselves, but the *act* of watching movies. My number #1 icebreaker is trying to sell someone on the AMC Stubs A-List, with the same "hey! if you watch like two movies a month, you'll break even :)"^[this has not worked]. To me, going to the cinema and sitting down is a sacred experience. This has only become more prevalent as I've graduated college, with my number one concern most days is "how do I kill time?"
+
+After COVID-19 and the rise of streaming services, the global box office has seen an overall plunge. However, with the advent of Christopher Nolan's Oppenheimer, Premium Large Formats (PLFs) have became all the rage, especially with the coveted IMAX 70mm, of which there are only 7 in the United States. In order for cinema to survive, it must become associated with luxury and prestige, and IMAX leads the forefront of this.
+
+![Photo by <a href="https://unsplash.com/@ballistic?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Isaac Moore</a> on <a href="https://unsplash.com/photos/amc-imax-building-wjLBQz2nvzE?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>](imax_backdrop.jpeg){.preview-image}
+
+Behind every great industry is a lie, and in this case, it's literally called LieMAX. IMAX, fervently hoping to expand, decided to slighty change what an "IMAX" is. Hoping to retrofit their theaters onto existing ones without new architecture. To the average person this isn't a big deal, but for weirdos like me with hypertuned preferences. And you should care, because you're getting a suboptimal experience for the exact same price as everyone else!
+
+# Finding where IMAX stores its secrets
+
+There is no centralized list of IMAX theaters in the world. There's a few resources that have been hand-maintained by a few brave cinephiles, but most are out of date and incomplete. But I would guess that the IMAX company themselves stores this, right?
+
+On [imax.com](https://imax.com), let's investigate the "Find a Theatre" option hiding in the footer of the page. This takes us to a theater find where if you enter a string of nearly *anything*, it gives you a list of theaters that match. Since the page isn't refreshing on every request, we can assume that there is some underlying API that's being requsted by the browser and being transformed into HTML markup with some client-side Javascript. Let's pop open Chrome DevTools and use my favorite invention in the entire world, the "Network Tab".
+
+![](screenshots/devtools.png)
+
+Ok. That's not very helpful. We see a bunch of Javascript files, a bunch of fonts (woff2), CSS, a bunch of junk. Did y'all really need to send me 4.3MB of precious data to see some theaters?
+
+If we filter by "Fetch/XHR" requests, we find exactly what we're looking for.
+
+![](screenshots/fetch_xhr.png)
+
+Still a bunch of junk, but a needle in our haystack. Notice there seems to be something calling a "query" endpoint. Let's click on it.
+
+![](screenshots/algolia_preview.png)
+
+Holy shit! That's our sauce. 
+
+If we right click that specific XHR request and click Copy > Copy as cURL, we get a string that allows us to perfectly emulate the request, including the specific headers and cookie information. Now, let me introduce my second favorite invention, [curlconverter.com](https://curlconverter.com). By taking this string and copy-pasting, we can get a snippet of code that perfectly replicates this in your favorite programming language.
+
+```{python}
+# | eval: false
+import requests
+
+headers = {
+    "Accept": "*/*",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Connection": "keep-alive",
+    "Origin": "https://www.imax.com",
+    "Sec-Fetch-Dest": "empty",
+    "Sec-Fetch-Mode": "cors",
+    "Sec-Fetch-Site": "cross-site",
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+    "content-type": "application/x-www-form-urlencoded",
+    "sec-ch-ua": '"Chromium";v="122", "Not(A:Brand";v="24", "Google Chrome";v="122"',
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": '"macOS"',
+    "x-algolia-api-key": "7c9c8e2eadbdc26fb3b97b5db64a28dd",
+    "x-algolia-application-id": "10MXKGB0UH",
+}
+
+data = '{"query":"","aroundLatLng":"42.65717,-71.140878","aroundRadius":500000,"attributesToRetrieve":["*"],"hitsPerPage":30}'
+
+response = requests.post(
+    "https://10mxkgb0uh-dsn.algolia.net/1/indexes/dev_web23_showtimes/query?x-algolia-agent=Algolia%20for%20JavaScript%20(4.17.2)%3B%20Browser",
+    headers=headers,
+    data=data,
+)
+```
+
+We've now discovered that they're using something called "Algolia". A first search leads to their webpage called "AI Search that understands". [Sure, Jan](https://www.cnet.com/tech/computing/google-said-ai-over-140-times-in-its-two-hour-google-io-keynote/). Algolia seems to be a YC-funded SAAS that handles searching for companies a bit too lazy to manage an elastisearch instance themselves. That being said, it seems people really like them and their product offering is strong, so they're likely perfectly fine for a non-tech company like IMAX.
+
+A quick search for "Algolia API" brings me to some [wonderful documentation](https://www.algolia.com/doc/rest-api/search/). Instead of reverse-engineering everything and writing a bunch of boilerplate `requests` crap, they publish a few API clients including one for [python](https://github.com/algolia/algoliasearch-client-python), my language of choice when I want to get down and dirty. From that, let's instantiate a client that pretends to be the imax.com website.
+
+```{python}
+from algoliasearch.search_client import SearchClient
+
+client = SearchClient.create("10MXKGB0UH", "7c9c8e2eadbdc26fb3b97b5db64a28dd")
+```
+
+No errors! We're in.
+
+From the original request, we see that they're tapping into an ["index"](https://www.algolia.com/doc/guides/sending-and-managing-data/manage-indices-and-apps/manage-indices/) called `dev_web23_showtimes`. Following Algolia's documentation, it should be as easy as
+
+```{python}
+showtimes_index = client.init_index("dev_web23_showtimes")
+```
+
+Let's see if we can get all of the movie theaters in the world. Following their documentation,
+
+```{python}
+result = showtimes_index.search(
+    "",
+    request_options={
+        "hitsPerPage": 1000,
+        "attributesToRetrieve": [
+            "*",
+            "-events",
+            "-movieSlugs",
+            "-movieVariantIds",
+        ],
+        "attributesToHighlight": [],
+    },
+)
+theaters_df = pl.from_dicts(result["hits"])
+theaters_df.glimpse()
+```
+
+We're done! That's every single IMAX Theater in the world, approximately, uh, 1000? 
+
+That doesn't pass the sniff test.
+
+This is a limitation of Algolia. If we inspect our original JSON response, we see that it actually does tell us how many total theaters in the world there are.
+
+```{python}
+result.pop("hits")
+display(result)
+```
+
+We see that the `nbHits` is 1748. Algolia's search API only allows us to access [1000 results](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/) in total, unless changed through an admin console. I looked, and the key I pulled is not an admin account, and it were I'd probably have the feds breaking down my door. In order to filter by any sort of string column, it has to be declared a "facet", and none of these columns have been declared that way. So I'm stuck with these 1000 results unless I figure out a good way to discriminate into the different
+
+## Breaking the world in half (and quarters)
+
+Let's go back to the drawing board. How did the original Algolia API work for figuring out which IMAX is around me? The original query string used on the website is `'{"query":"","aroundLatLng":"42.65717,-71.140878","aroundRadius":500000,"attributesToRetrieve":["*"],"hitsPerPage":30}`. Searching google for `aroudnLatLng` leads to [documentation](https://www.algolia.com/doc/api-reference/api-parameters/aroundLatLng/) that links to Algolia's [guide on geolocation](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/). Perhaps we could just pick a bunch of random points and radiuses and hope we cover the earth?
+
+Sadly, this is probably not a great idea. The mathematical problem of fitting a bunch of circles such that it covers a surface is [difficult](https://puzzling.stackexchange.com/questions/110592/can-you-irrigate-your-lawn-with-23-sprinklers/110608#110608), and I'm already very much a washed-up mathematician. I also want to be respectful of IMAX's backend and not submit a stupid amount of requests, given I looked at Algolia's [pricing](https://www.algolia.com/pricing/). 
+
+There is a solution, as Algolia also features the ability to search within a [rectangular box](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/how-to/filter-results-inside-a-rectangle-area/). Given the entire world is standardized by the measures of latitude and longitude, all we have to do is split up the world into a bunch of squares and search within. 
+
+I'm generally directionally challenged, so a special shoutout to ChatGPT who gave me the rectangulars used to divide the world into parts. 
+
+```{python}
+quadrants = [
+    # Northwest Quadrant
+    (0, -180, 90, 0),
+    # Northeast Quadrant, split twice
+    # (0, 0, 90, 180),
+    # (0, 0, 45.0, 180),
+    (0, 0, 22.5, 180),
+    (22.5, 0, 45.0, 180),
+    (45.0, 0, 90, 180),
+    # Southwest Quadrant
+    (-90, -180, 0, 0),
+    # Southeast Quadrant
+    (-90, 0, 0, 180),
+]
+
+hits: list = []
+for quadrant in quadrants:
+    quad_hits = showtimes_index.search(
+        "",
+        request_options={
+            "hitsPerPage": 1000,
+            "attributesToRetrieve": [
+                "*",
+                "-events",
+                "-movieSlugs",
+                "-movieVariantIds",
+            ],
+            "attributesToHighlight": [],
+            "insideBoundingBox": [list(float(val) for val in quadrant)],
+        },
+    )["hits"]
+    print(len(quad_hits), quadrant)
+    hits.extend(quad_hits)
+print(len(hits))
+```
+
+I needed to split the box corresponding to the Northeast into multiple rectangles to avoid hitting the 1000 limit. The world has been split up into 7 recentagles, each retrieving the entire list of IMAX theaters. We've found 1745 total theaters.
+
+3 theaters seem to be missing. What gives? Let's go back to the original 1000 sample of the IMAX theaters, filtering for any locations that doesn't have location data.
+
+```{python}
+missing_geoloc_theaters = theaters_df.filter(pl.col("_geoloc").is_null())
+missing_geoloc_theaters.glimpse()
+```
+
+The `path` column corresponds to `imax.com/theatre/{path}`, and I'm met with a `Application error: a client-side exception has occurred (see the browser console for more information).`, and the console tells me that it has to do with a null-reference error. I guess these theaters aren't ready for showtime yet ¯\\\_(ツ)_/¯ 
+
+Since I don't want to pollute my data, I'm gonna ignore them. Let's assemble our final dataframe, dropping some unneeded columns.
+
+```{python}
+all_theaters_df = (
+    pl.from_dicts(hits)
+    .sort(pl.col("slug"))
+    .drop(["objectID", "objectType", "fandangoTmsId"])
+    .with_columns(
+        pl.when(pl.col(pl.Utf8).str.len_bytes() == 0)
+        .then(None)
+        .otherwise(pl.col(pl.Utf8))
+        .name.keep()
+    )
+    .unnest("_geoloc")
+    .rename(
+        {
+            "stateName": "state_name",
+            "countryName": "country_name",
+        }
+    )
+)
+
+show(all_theaters_df.drop(["slug", "path"]), scrollX=True)
+```
+
+# Map of every IMAX in the world
+
+Using this data, we can create a map of every IMAX in the world. 
+
+```{python}
+# | code-fold: true
+# | column: screen-inset
+m = Map(
+    basemap=basemaps.CartoDB.Positron,
+    center=(0, 0),
+    zoom=1.5,
+    prefer_canvas=True,
+    layout=Layout(width="100%", height="700px"),
+)
+
+marker_icon = AwesomeIcon(
+    name="fa-film", marker_color="blue", icon_color="white", spin=False
+)
+
+markers: list = []
+for row in all_theaters_df.iter_rows(named=True):
+    theater_name = row["name"]
+    marker = Marker(
+        icon=marker_icon,
+        title=theater_name,
+        location=(row["lat"], row["lng"]),
+        draggable=False,
+    )
+    popup = HTML()
+    popup.value=f"<h1>{theater_name}<\h1>"
+    popup.placeholder = "Hello World"
+    marker.popup = popup
+    markers.append(marker)
+
+cluster = MarkerCluster(markers=markers)
+m.add(cluster)
+
+display(m)
+```
+
+My economics degree is talking to me like the green goblin mask, so let's do a quick regression on GDP per capita and number of IMAXes per capita for a given country.
+
+# I don't even think IMAX knows what is IMAX
+
+```{python}
+df = pl.from_pandas(pd.read_html("backup_table.html")[0]).drop(["Unnamed: 0", "Proj.1"])
+display(df)
+```

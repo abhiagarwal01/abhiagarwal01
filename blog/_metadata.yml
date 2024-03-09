@@ -1,6 +1,5 @@
-freeze: false
+freeze: true
 title-block-banner: true
-highlight-style: a11y
 execute:
   cache: true
 nocite: |
