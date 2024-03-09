@@ -124,5 +124,5 @@
 
 # Source files
 # ============
-*.qmd       text
-_freeze/*   linguist-generated=true
+*.qmd          text
+_freeze/**/*   linguist-generated=true
