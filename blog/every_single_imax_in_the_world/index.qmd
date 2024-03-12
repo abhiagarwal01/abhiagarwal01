@@ -4,6 +4,8 @@ description: "IMAX Theaters have seen a resurrgence with the advent of cinematic
 author: "Abhi Agarwal"
 date: "2024-03-08"
 categories: [python, movies]
+filters:
+  - optimize-images
 draft: true
 ---
 
@@ -243,7 +245,7 @@ for row in all_theaters_df.iter_rows(named=True):
         draggable=False,
     )
     popup = HTML()
-    popup.value=f"<h1>{theater_name}<\h1>"
+    popup.value=f"<h1>{theater_name}</h1>"
     popup.placeholder = "Hello World"
     marker.popup = popup
     markers.append(marker)
