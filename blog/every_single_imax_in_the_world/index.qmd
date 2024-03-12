@@ -19,7 +19,7 @@ from ipyleaflet import Map, Marker, basemaps, MarkerCluster, AwesomeIcon
 from ipywidgets import Layout, HTML
 
 opt.maxBytes = 0
-init_notebook_mode(all_interactive=True, connected=True)
+init_notebook_mode(all_interactive=True, connected=False)
 ```
 
 After not really caring about movies, I suddenly developed an obsession with watching movies. Not necessarily the movies themselves, but the *act* of watching movies. My number #1 icebreaker is trying to sell someone on the AMC Stubs A-List, with the same "hey! if you watch like two movies a month, you'll break even :)"^[this has not worked]. To me, going to the cinema and sitting down is a sacred experience. This has only become more prevalent as I've graduated college, with my number one concern most days is "how do I kill time?"
