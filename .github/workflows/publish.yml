@@ -36,21 +36,22 @@ jobs:
         id: pages
         uses: actions/configure-pages@v4
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version-file: "pyproject.toml"
 
-      - name: Install the latest version of uv
+      - name: Setup uv
         uses: astral-sh/setup-uv@v3
         with:
             version: "latest"
+            enable-cache: true
 
       - name: Install Python dependencies
         run: |
           uv venv
-          source .venv/bin/activate
-          uv sync
+          . .venv/bin/activate
+          uv sync --all-extras --frozen
           echo PATH=$PATH >> $GITHUB_ENV
 
       - name: Install vips

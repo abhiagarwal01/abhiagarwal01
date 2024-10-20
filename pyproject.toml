@@ -12,7 +12,7 @@ dependencies = [
     "devtools>=0.12.2",
     "rich>=13.7.1",
     "nbformat>=5.9.2",
-    "polars>=0.20.14",
+    "polars>=1.0.0",
     "algoliasearch>=3.0.0",
     "ipyleaflet>=0.18.2",
     "itables[polars]>=1.7.1",
@@ -24,6 +24,6 @@ requires-python = ">= 3.12"
 
 [tool.uv]
 dev-dependencies = [
-    "ruff>=0.3.2",
+    "ruff>=0.7.0",
     "pre-commit>=3.6.2",
 ]
