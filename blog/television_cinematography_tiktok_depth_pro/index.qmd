@@ -1,0 +1,88 @@
+---
+title: "Investigating television cinematography in the age of TikTok using Apple's `Depth Pro` models"
+description: "I investigate how television have moved the focus of their content towards the middle, as to support being cropped to be shared on vertical-short form content websites like TikTok. I find that compared to television of the past, content produced today is biased towards the center."
+author: "Abhi Agarwal"
+date: "2024-10-20"
+categories: [media, python]
+#filters:
+#  - optimize-images
+draft: true
+citation: true
+---
+
+# Introduction
+
+I recently checked out the live-action Avatar: The Last Airbender show on Netflix. I grew up on the nickelodeon show, and I'm well aware of how all adaptations of the source are cursed^[Apparently there was a movie too...]. It really wasn't good at all and made changes that indicate a fundamental misunderstanding of the source material^[Don't even get me started on how they butchered Sokka's character development on Kyoshi Island.], but I did notice something weird about it.
+
+I just kinda *looked* weird.
+
+Everything about it was in your face. I noticed my eyes were glued in one part of the screen, the center. All the action was centered. Hell, even when people were *talking*, instead of a wide-panning shot, they just cut between them. It was like it was filmed... to be watched on your phone, like on TikTok.
+
+I am not the first person to notice this. Ryan Broderick, former Buzzfeed journalist, shared this sentiment on Twitter:
+
+{{< tweet broderick 1761184626591019347 >}}
+
+The whole thread, including the discussion, is a nice read. Yet, I am inclined to apply Hanlon's Razor. It could just be an artifact of the director's style, maybe even the cameras themselves, or a constrained imposed by the use of their CGI with a television budget.
+
+I then recalled an article I read earlier this year, where [AT&T executives asked the showrunners of Game of Thrones to film content in vertical aspect ratios, as to be digested on TikTok.](https://www.wsj.com/arts-culture/television/game-of-thrones-true-blood-creators-3-body-problem-netflix-d0aa9420?mod=style_feat1_magazine_pos1) Like, *that* Game of Thrones, the last show in recent history to become an universal cultural phenomenon, renowned particularly for its cinematography. It's true, people younger than I am^[As of writing, I'm 23 years old, TikTok only became *a thing* during my senior year of high school.] consume a lot of their content on TikTok. I recall Paramount releasing the full-length *Mean Girls* movie on [TikTok in 23 clips to celebrate the movie's 20th anniversary](https://variety.com/2023/digital/news/mean-girls-free-tiktok-23-parts-paramount-1235743213/). Here's the [Avatar: the Last Airbender TikTok account](https://www.tiktok.com/@avatarnetflix), where Netflix's army of editors takes advantage of the show's cinematography to create vertical videos getting tens of thousands of views.
+
+It's all just a little bit too suspicious. Television and media production broadly is a pretty cut-throat industry — if people aren't consuming your content, you die. Rather than goading the consumers to where you are, you must go to where the consumers are. Right now, the consumers are zoomers addicted to vertical, short-form media.
+
+Alright, cool theory and all, but how exactly do we show this?
+
+# Depth mapping
+
+I confess, I originally wanted to investigate this when I first saw Ryan's tweet earlier this year. I just had zero clue where to get started. How exactly do you measure what's the "focus" in an image, where the director wants you to look?
+
+Well, you could use something like Meta's [`SAM2`](https://github.com/facebookresearch/sam2) models. The `SAM` models are used to segment an image into the logical components inside of it, and `SAM2` in particular was trained on temporal stability, meaning it can use the predictions of prior frames to inform the prediction of the next frame. If you see a ball, and then the ball rolls out of frame, you are still confident that it's a "ball" even as you're seeing less and less of it owning to your past knowledge. If you're working from a clean slate each time, you might not be as confident.
+
+![Segment anything 2](https://raw.githubusercontent.com/facebookresearch/sam2/refs/heads/main/assets/sa_v_dataset.jpg)
+
+Unfortunately, while the `SAM` models are good at telling us what's *in* an image, they aren't good at telling us what's *important* in an image. There could be plenty of interesting elements in a particular frame, but I have no good way to measure their importance. Additionally, while `SAM2` runs pretty quickly, I'm working with thousands of images, and scale of seconds means we're dealing on the magnitude of hours for just a single episode.
+
+I then spent the next few months intermittently asking ChatGPT and Claude if they had any ideas, and they were, as expected, useless. Then, just a few days ago, [Apple's press release for their `Depth Pro` model](https://machinelearning.apple.com/research/depth-pro) popped up on the top of my Reddit feed.
+
+Depth mapping is exactly what it sounds like. Think about it this way — when we take a photo, we're taking our three-dimensional reality and compressing it into a two-dimensional representation. Depth mapping aims to do the exact opposite, take a two-dimensional image and create a representation for how that three-dimensional reality *could* have looked like, as represented as its depth away from the camera. If that doesn't mean much to you: look below.
+
+::: {layout-ncol=2}
+![Original image](assets/aang-still.jpg)
+
+![Generated inverse depth map](assets/aang-still-inverse-depth.png)
+:::
+
+Depth mapping isn't perfect, but it's *good enough*. The model successfully isolated Aang from the background and correctly guessed his orientation relative to camera, with his hand being the closest. Aang's hand isn't the important part of the image, but we can use the rest of the data to make some pretty informed guesses for what is. While the models appear to be State-of-the-Art, I don't care much about precision, but rather speed — I picked the Depth Pro models because they're freaking fast. I'm going to be running this on a lot of images on a single GPU.
+
+# What's the "focus" of an image?
+
+With that example image of Aang, we have to be a little bit clever to determine what's "important".
+
+We can borrow a bit from Physics. You call it center of gravity, I call it "centroid", but it's the point where if I were to cut it out, you could balance it on your finger. Finding the centroid theoretically is a bit of a nightmare, but in practice, not very difficult. We just take the average of all the points. Here's what the "naive" centroid looks like.
+
+Not super good. We can exploit the depth values actually given to us from the model, and use it as a measure of "density". We will weigh the regions with higher density more than the regions with lower density when we calculate the centroid.
+
+A keen-eyed reader will notice it's not a classic weighted average, but instead fine-tuned^[This is technical speak for vibes-based math] to be more representative of what my human brain tells me. Then, to calculate a psuedo-confidence interval, I calculate the boundary to represent 80% of the "mass"^[All the code is available in a repo linked below, but the general problem I'm describing is **hard**. It's basically an optimization problem  to find the minimum interval that contains the most mass, and since I'm also considering weight, it's a three-dimensional optimization problem with the goal to minimize the boundary.] of the frame's focus is. I take the x-coordinates of both "sides" of the percentile to represent the boundary of where our focus is.
+
+I tried it on a bunch of randomly-selected images, attached below, and decided it looks good enough for me. Let's run this on the entire series!
+
+# Findings with a bunch of made-up metrics
+
+I had a copy of the show on a local hard-drive ripped from the Blu-Ray, and transcoded to be 1920x1080 AV1. We can run a quick FFMpeg command to extract a bunch of frames from a given video.
+
+```bash
+ffmpeg -i input.mp4 -vf "scale=1536:-1,fps=1/5" output_%04d.avif
+```
+
+I picked a frame every 5 seconds, mostly due to compute restraints, and scaled them down to 1536 width. I also cropped the black bars at the bottom as to not confuse the model. Since I did this all on a 4090 with native AV1 encode/decode, I opted for AVIF to save space. The model only works with images of size 1536x1536, so we will interpolate the image to fit that square.
+
+For a bit of real-world numbers, an original file would be about
+
+# A comparison with `Game of Thrones`
+
+
+# Conclusion
+
+# Future work
+
+I didn't intend this to be academic endeavor, but this article could probably serve as a decent starting point towards a full-fledged paper. The metric I created was based on the scientific process of "vibes", and I'm not gonna pretend that I'm infalliable from subconsciously p-hacking myself to find something interesting. A better researcher could design a more rigorous metric and potentially measure statistical significance. Additionally, Apple's Depth Pro models aren't optimized for temporal stability. A more advanced workflow would use something like [`DepthCrafter`](https://github.com/Tencent/DepthCrafter), a depth model trained precisely for videos. Due to compute constraints^[I did all of this work on a M1 Macbook Pro and a 4090 on a server at my parent's house.], I didn't test as much data as I wanted to.
+
+If you're interested in working further on me, please reach out to me! My email is probably somewhere on this website.

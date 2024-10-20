@@ -3,7 +3,7 @@ title: "2 Fast 2 Furious: Every movie should be like this"
 description: "One man's journey for the perfect movie title"
 author: "Abhi Agarwal"
 date: "2023-09-06"
-categories: [movies, python]
+categories: [media, python]
 ---
 
 I really do think *2 Fast 2 Furious* has the greatest movie title of all-time. It's perfect — it keeps the consistent branding of the first film, uses the "two" as both an adjective and a number, it's fucking cool. It's a masterpiece.
