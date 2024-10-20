@@ -41,12 +41,16 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Install the latest version of uv
+        uses: astral-sh/setup-uv@v3
+        with:
+            version: "latest"
+
       - name: Install Python dependencies
         run: |
-          python -m pip install uv
           uv venv
-          uv pip sync requirements.lock
-          . .venv/bin/activate
+          source .venv/bin/activate
+          uv sync
           echo PATH=$PATH >> $GITHUB_ENV
 
       - name: Install vips

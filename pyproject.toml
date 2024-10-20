@@ -17,13 +17,12 @@ dependencies = [
     "ipyleaflet>=0.18.2",
     "itables[polars]>=1.7.1",
     "lxml>=5.1.0",
+    "pytube @ git+https://github.com/msemple1111/pytube",
 ]
 readme = "README.md"
 requires-python = ">= 3.12"
 
-[tool.rye]
-managed = true
-virtual = true
+[tool.uv]
 dev-dependencies = [
     "ruff>=0.3.2",
     "pre-commit>=3.6.2",
