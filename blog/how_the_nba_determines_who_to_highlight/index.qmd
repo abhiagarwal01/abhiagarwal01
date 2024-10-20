@@ -27,21 +27,17 @@ highlight_playlists = {
 Using `pytube`, we can get every single video from this. Let's convert it into a `polars` dataframe.
 
 ```{python}
-import pytube
-import polars as pl
+# import pytube
+# import polars as pl
 
-all_videos = []
-for playlist_url in highlight_playlists.values():
-    videos = [video async for video in pytube.Playlist(playlist_url).videos()]
-    all_videos.append(videos)
+# all_videos = []
+# for playlist_url in highlight_playlists.values():
+#     videos = [video async for video in pytube.Playlist(playlist_url).videos()]
+#     all_videos.append(videos)
 
 
-highlights_df = pl.DataFrame(all_videos, schema=["video_title", "video_id"])
-display(highlights_df)
-```
-
-```{python}
-print("hello world")
+# highlights_df = pl.DataFrame(all_videos, schema=["video_title", "video_id"])
+# display(highlights_df)
 ```
 
 # Scraping the headshots for all NBA players
