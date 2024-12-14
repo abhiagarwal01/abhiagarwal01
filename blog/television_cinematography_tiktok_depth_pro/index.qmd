@@ -38,7 +38,7 @@ Well, you could use something like Meta's [`SAM2`](https://github.com/facebookre
 
 ![Segment anything 2](https://raw.githubusercontent.com/facebookresearch/sam2/refs/heads/main/assets/sa_v_dataset.jpg)
 
-Unfortunately, while the `SAM` models are good at telling us what's *in* an image, they aren't good at telling us what's *important* in an image. There could be plenty of interesting elements in a particular frame, but I have no good way to measure their importance. Additionally, while `SAM2` runs pretty quickly, I'm working with thousands of images, and scale of seconds means we're dealing on the magnitude of hours for just a single episode.
+Unfortunately, while the `SAM` models are good at telling us what's *in* an image, they aren't good at telling us what's *important* in an image. There could be plenty of interesting elements in a particular frame, but I have no good or easy way to measure their importance. Nice tool, not suited for this problem.
 
 I then spent the next few months intermittently asking ChatGPT and Claude if they had any ideas, and they were, as expected, useless. Then, just a few days ago, [Apple's press release for their `Depth Pro` model](https://machinelearning.apple.com/research/depth-pro) popped up on the top of my Reddit feed.
 
@@ -74,15 +74,14 @@ ffmpeg -i input.mp4 -vf "scale=1536:-1,fps=1/5" output_%04d.avif
 
 I picked a frame every 5 seconds, mostly due to compute restraints, and scaled them down to 1536 width. I also cropped the black bars at the bottom as to not confuse the model. Since I did this all on a 4090 with native AV1 encode/decode, I opted for AVIF to save space. The model only works with images of size 1536x1536, so we will interpolate the image to fit that square.
 
-For a bit of real-world numbers, an original file would be about
+For a bit of real-world numbers, an original file would be about 
 
 # A comparison with `Game of Thrones`
-
 
 # Conclusion
 
 # Future work
 
-I didn't intend this to be academic endeavor, but this article could probably serve as a decent starting point towards a full-fledged paper. The metric I created was based on the scientific process of "vibes", and I'm not gonna pretend that I'm infalliable from subconsciously p-hacking myself to find something interesting. A better researcher could design a more rigorous metric and potentially measure statistical significance. Additionally, Apple's Depth Pro models aren't optimized for temporal stability. A more advanced workflow would use something like [`DepthCrafter`](https://github.com/Tencent/DepthCrafter), a depth model trained precisely for videos. Due to compute constraints^[I did all of this work on a M1 Macbook Pro and a 4090 on a server at my parent's house.], I didn't test as much data as I wanted to.
+I didn't intend this to be academic endeavor, but this article could probably serve as a decent starting point towards a full-fledged paper. The metric I created was based on the scientific process of "vibes", and I'm not gonna pretend that I'm immune from subconsciously p-hacking myself to find something interesting. A better researcher could design a more rigorous metric and potentially measure statistical significance. Additionally, Apple's Depth Pro models aren't optimized for temporal stability. A more advanced workflow would use something like [`DepthCrafter`](https://github.com/Tencent/DepthCrafter), a depth model trained precisely for videos. Due to compute constraints^[I did all of this work on a M4 Macbook Pro and a 4090 on a server at my parent's house.], I didn't test as much data as I wanted to.
 
 If you're interested in working further on me, please reach out to me! My email is probably somewhere on this website.

@@ -8,7 +8,7 @@ authors = [
 dependencies = [
     "jupyter>=1.0.0",
     "jupyter-cache>=1.0.0",
-    "pydantic>=2.6.3",
+    "pydantic>2.10",
     "devtools>=0.12.2",
     "rich>=13.7.1",
     "nbformat>=5.9.2",
@@ -17,10 +17,10 @@ dependencies = [
     "ipyleaflet>=0.18.2",
     "itables[polars]>=1.7.1",
     "lxml>=5.1.0",
-    "pytube @ git+https://github.com/msemple1111/pytube",
+    "pytubefix>=8.8.1",
+    "ruff>=0.8.3",
 ]
 readme = "README.md"
-requires-python = ">= 3.12"
 
 [tool.uv]
 dev-dependencies = [

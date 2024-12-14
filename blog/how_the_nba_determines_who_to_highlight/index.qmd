@@ -1,6 +1,6 @@
 ---
 title: "How does the NBA choose which players they highlight?"
-description: "On the NBA Youtube Page, the NBA selects one player from each team to \"highlight\" each game. I use `opencv` to match players onto their youtube highlights, and then create a formula used to rank players based on whether the NBA determines they're worth a highlight."
+description: "On the NBA Youtube Page, the NBA selects one player from each team to \"highlight\" each game. I use perceptual hashing to match players onto their youtube highlights, and then model."
 author: "Abhi Agarwal"
 date: "2024-03-15"
 categories: [python, nba]
@@ -12,7 +12,15 @@ draft: true
 
 # The NBA's youtube highlights
 
-The NBA, since 2019, has conveniently put all of their in-game highlights on youtube. The NBA highlight sphere used to be dominated by accounts like FreeDawkins, so this was the NBA's attempt at sapping some of that advertising money for themselves.
+The NBA, for years, has published highlight videos on their YouTube channel. Spurned by the popularity of channels such as "FreeDawkins", the NBA aims to satisfy the appetites of young people with short attention spans who can't be damned to watch the game.
+
+Each highlight video thumbnail features one player from each team, the away team on the left and the home team on the right.
+
+But how does the NBA choose who to highlight? Presumably, there's they look at the box scores and figure out who had the "best game". Said art is subjective by nature, and I'd imagine it's not an equal process, in that some players, due to their stature, may be highlighted more than they deserve.
+
+In this project, I first create a dataset for these highlights by using image hashing techniques to match each highlight thumbnail to the player it's representing. I then construct a discrete choices hierarchical Bayesian model with a player fixed effect, to measure *how* the NBA chooses who to highlight.
+
+# Downloading the data
 
 ```{python}
 highlight_playlists = {
@@ -20,7 +28,7 @@ highlight_playlists = {
     "2021": "https://www.youtube.com/playlist?list=PLlVlyGVtvuVkIjURb-twQc1lsE4rT1wfJ",
     "2022": "https://www.youtube.com/playlist?list=PLlVlyGVtvuVm4_E_faSFuu3nU0F9O6XbR",
     "2023": "https://www.youtube.com/playlist?list=PLlVlyGVtvuVkAiuNG6gXxaUgjekofxxgs",
-    #"2024": "https://www.youtube.com/playlist?list=PLlVlyGVtvuVkxr3RnRwVqtuWR7BSBE0tD",
+    "2024": "https://www.youtube.com/playlist?list=PLlVlyGVtvuVkxr3RnRwVqtuWR7BSBE0tD",
 }
 ```
 
