@@ -1,6 +1,6 @@
 ---
 title: "How does the NBA choose which players they highlight?"
-description: "On the NBA Youtube Page, the NBA selects one player from each team to \"highlight\" each game. I use perceptual hashing to match players onto their youtube highlights, and then model."
+description: "On the NBA Youtube Page, the NBA selects one player from each team to \"highlight\" each game. I use perceptual hashing to match players onto their youtube highlights, and then model the problem using a Discrete Choice logistic model."
 author: "Abhi Agarwal"
 date: "2024-03-15"
 categories: [python, nba]
@@ -10,7 +10,7 @@ filters:
 draft: true
 ---
 
-# The NBA's youtube highlights
+# Introduction
 
 The NBA, for years, has published highlight videos on their YouTube channel. Spurned by the popularity of channels such as "FreeDawkins", the NBA aims to satisfy the appetites of young people with short attention spans who can't be damned to watch the game.
 
@@ -18,11 +18,17 @@ Each highlight video thumbnail features one player from each team, the away team
 
 But how does the NBA choose who to highlight? Presumably, there's they look at the box scores and figure out who had the "best game". Said art is subjective by nature, and I'd imagine it's not an equal process, in that some players, due to their stature, may be highlighted more than they deserve.
 
-In this project, I first create a dataset for these highlights by using image hashing techniques to match each highlight thumbnail to the player it's representing. I then construct a discrete choices hierarchical Bayesian model with a player fixed effect, to measure *how* the NBA chooses who to highlight.
+In this project, I first create a dataset for these highlights by using image hashing techniques to match each highlight thumbnail to the player it's representing. I then construct a discrete choices model to measure *how* the NBA chooses who to highlight.
 
-# Downloading the data
+# Getting the data we're interested in
 
-```{python}
+We're interested in two sets of data. We want to connect the box score data, along with the highlight data. We have to mix in a bunch of techniques in here.
+
+## Youtube data
+
+Let's get the youtube data first. Here's the playlists, where the NBA has thankfully recorded most of the games.
+
+```{.python}
 highlight_playlists = {
     "2020": "https://www.youtube.com/playlist?list=PLlVlyGVtvuVlr5GAksVQA37IE83MzRqln",
     "2021": "https://www.youtube.com/playlist?list=PLlVlyGVtvuVkIjURb-twQc1lsE4rT1wfJ",
@@ -32,23 +38,50 @@ highlight_playlists = {
 }
 ```
 
-Using `pytube`, we can get every single video from this. Let's convert it into a `polars` dataframe.
+Using `pytubefix` (a fork of pytube), we can get every single video from this and their details:
 
-```{python}
-# import pytube
-# import polars as pl
-
-# all_videos = []
-# for playlist_url in highlight_playlists.values():
-#     videos = [video async for video in pytube.Playlist(playlist_url).videos()]
-#     all_videos.append(videos)
-
-
-# highlights_df = pl.DataFrame(all_videos, schema=["video_title", "video_id"])
-# display(highlights_df)
+```{.python}
+{{< include scripts/download_videos.py >}}
 ```
 
-# Scraping the headshots for all NBA players
+I ran this script outside the notebook, but it works! Now, let's read the data, and convert it into a polars dataframe:
+
+```{python}
+import shelve
+from pathlib import Path
+import polars as pl
+
+shelf_path = Path("data/vid_details")
+
+with shelve.open(shelf_path, "r") as db:
+  rows = [(key,) + val for key, val in dict(db).items()]
+
+video_df = pl.DataFrame(
+    rows, schema=["vid_id", "title", "views", "thumbnail", "publish_date"], orient="row"
+)
+video_df.write_parquet("data/vid_details.parquet")
+display(video_df)
+```
+
+Now, a bit of manipulation, using regexes to parse out the "team" and any associated metadata.
+
+```{python}
+video_parsed_df = df = video_df.with_columns(
+    pl.col("title").str.extract(r"^(.*?) at", 1).str.to_titlecase().alias("away_team"),
+    pl.col("title")
+    .str.extract(r"at (.*?) \|", 1)
+    .str.to_titlecase()
+    .alias("home_team"),
+    pl.col("title").str.extract(r"\| ([A-Za-z0-9, ]+)$", 1).alias("date"),
+)
+video_parsed_df
+```
+
+## NBA data
+
+### Box score data
+
+### Scraping the headshots for all NBA players
 
 The NBA makes it notoriously tricky to get headshots of old players. Twitter user [@NBA_University](https://twitter.com/NBA_University), who produces some awesome content, said he and his friends [figured out how to do this](https://twitter.com/NBA_University/status/1767927001661231222), but also said [he was gonna paywall it](https://twitter.com/NBA_University/status/1767948162746970497). Ok. I'm not gonna do that.
 
@@ -58,4 +91,8 @@ Thankfully, I found a loophole. If you append the player's team id, documented [
 
 The upside is that headshots are now segregated by the `team id`. So Derrick White, who was traded from the San Antonio Spurs to the Boston Celtics in Feburary 2022 (which I will look on back as one of the best days of my life), has two headshots for 2021 — the San Antonio Spurs one (`https://cdn.nba.com/headshots/nba/1610612759/2021/1040x760/1628401.png`), and the Boston Celtics one (`https://cdn.nba.com/headshots/nba/1610612738/2021/1040x760/1628401.png`).
 
-I didn't store the headshots themselves in this repository, because it's a fuck-ton of space and also maybe illegal? No clue. But I did download a good chunk of them for this endeavor.
+So, the solution here is surprisingly simple. Construct a list of all unique combinations of `(team_id, season, player_id)` and then hit the CDN with the preconstructed URL to get the headshots.
+
+```{.python}
+{{< include scripts/download_headshots.py >}}
+```
