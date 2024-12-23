@@ -51,8 +51,7 @@ jobs:
           UV_COMPILE_BYTECODE: 1
 
       - name: Install vips
-        run:
-          sudo apt install libvips-tools
+        run: sudo apt install libvips-tools
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
