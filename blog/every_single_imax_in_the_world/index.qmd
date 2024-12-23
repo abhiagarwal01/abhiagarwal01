@@ -131,7 +131,7 @@ result.pop("hits")
 display(result)
 ```
 
-We see that the `nbHits` is 1748. Algolia's search API only allows us to access [1000 results](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/) in total, unless changed through an admin console. I looked, and the key I pulled is not an admin account, and it were I'd probably have the feds breaking down my door. In order to filter by any sort of string column, it has to be declared a "facet", and none of these columns have been declared that way. So I'm stuck with these 1000 results unless I figure out a good way to discriminate into the different
+We see that the `nbHits` is 1798. Algolia's search API only allows us to access [1000 results](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/) in total, unless changed through an admin console. I looked, and the key I pulled is not an admin account, and it were I'd probably have the feds breaking down my door. In order to filter by any sort of string column, it has to be declared a "facet", and none of these columns have been declared that way. So I'm stuck with these 1000 results unless I figure out a good way to discriminate into the different
 
 ## Breaking the world in half (and quarters)
 
@@ -180,7 +180,7 @@ for quadrant in quadrants:
 print(len(hits))
 ```
 
-I needed to split the box corresponding to the Northeast into multiple rectangles to avoid hitting the 1000 limit. The world has been split up into 7 recentagles, each retrieving the entire list of IMAX theaters. We've found 1745 total theaters.
+I needed to split the box corresponding to the Northeast into multiple rectangles to avoid hitting the 1000 limit. The world has been split up into 7 recentagles, each retrieving the entire list of IMAX theaters. We've found 1795 total theaters.
 
 3 theaters seem to be missing. What gives? Let's go back to the original 1000 sample of the IMAX theaters, filtering for any locations that doesn't have location data.
 
@@ -238,6 +238,8 @@ marker_icon = AwesomeIcon(
 markers: list = []
 for row in all_theaters_df.iter_rows(named=True):
     theater_name = row["name"]
+    if theater_name is None:
+        continue
     marker = Marker(
         icon=marker_icon,
         title=theater_name,
