@@ -1,0 +1,29 @@
+---
+title: "Dynamic environment variables on the frontend with `envsubst` and `vite`."
+description: "Single-Page applications come with the unfortunate downside of being static, requiring a build per environment. This can become painful and error-prone for applications that need to be deployed on many hosts. I wrote a `vite` plugin that utilizes `envsubst` to create applications that can be modified at start-time with zero need to re-build."
+author: "Abhi Agarwal"
+date: "2024-12-22"
+categories: [frontend, typescript]
+#filters:
+#  - optimize-images
+draft: true
+citation: false
+---
+
+# Introduction
+
+Despite the craze behind Next.js and SSR... most of us normies are still writing single-page React applications, and will continue to do so until the heat death of the universe. Single-page applications have the advantage of compiling down to a bunch of HTML, Javascript, and CSS files. We can throw that on S3, or in my case, throw that in an nginx docker container, and you have a full production-ready app! Well, production-ready-*ish*.
+
+The nature of my work involves building apps that are self-hosted by my clients. While I do my best to write thorough instructions, I have zero control of how they _actually_ deploy it. Currently, we're sending over docker containers and having our client load them on their internal machine. I was recently faced with an interesting problem. My current project is a docker compose stack, with a classic React SPA frontend, a backend, and a bunch of auxiliary services. Everything is configured via an `.env` file, including the domain name. We develop locally via HTTPS and self-signed certificates for maximum security, and every service has its own subdomain.
+
+Well, I asked the client to tell me the domain name, and they told me they don't necessarily know. In that case, how will our react app know where to communicate with the backend app? For all the other applications, like our backend, they know where to communicate with other services by reading variables at boot with a hefty `environment` block in the compose, but our frontend doesn't _have_ a boot stage.
+
+Solving this problem took me down a rabbit hole, and I ended up inventing my own solution. Namely, I use the `nginx` container's `envsubst` directive and a custom vite plugin to transform environment variables into like, _real_ environment variables. 
+
+# Things that _can_ work (but you shouldn't do)
+
+The common solution I found relating to this problem involves manipulating `window.location.hostname`. `window.location` returns a [`Location`](https://developer.mozilla.org/en-US/docs/Web/API/Location) object, and that has a `hostname` property. Assuming our app is hosted on a subdomain, we can just append it with $subdomain and we've solved our problem!
+
+But it's not very robust. Nothing guarantees that this is true. After all, my client could choose to host the backend on an entirely different domain, and I would be non the wiser. We've essentially just hardcoded a different constraint. Perhaps that's enough! But it's probably not. 
+
+# My solution — transforming environment variables into actual environment variables
